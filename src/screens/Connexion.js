@@ -6,6 +6,8 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  Image,
+  RootTagContext,
 } from "react-native";
 
 import SignIn from "../components/SignIn";
@@ -18,6 +20,10 @@ function Connexion({ navigation }) {
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
       <View style={styles.header}>
+        <Image
+          style={styles.logo}
+          source={require("../../assets/compass.png")}
+        />
         <Text style={styles.title}>Carnet</Text>
         <Text style={styles.title}>de voyage</Text>
       </View>
@@ -52,31 +58,39 @@ export default Connexion;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginVertical: "20%",
     justifyContent: "space-between",
-    paddingHorizontal: 40,
+    backgroundColor: "#FEFAE0",
   },
   header: {
-      
+    alignItems: "center",
   },
-  title: {
-    fontSize: 52,
-    fontWeight: '600',
-    color: "#E97777",
-    textAlign: 'center',
-    lineHeight: 52,
-    fontFamily:'DancingScript'
+  logo: {
+    width: 100,
+    height: 100,
+    marginVertical: 8,
+    transform: [{ rotate: "15deg" }],
+  },
+  title: {
+    fontSize: 48,
+    fontWeight: "600",
+    color: "#3D7838",
+    textAlign: "center",
+    lineHeight: 48,
+    fontFamily: "PollerOne",
+    marginBottom: -4,
   },
   footer: {
     alignItems: "center",
   },
   footerText: {
-    color: "#808B97",
+    color: "#234520",
+    fontFamily: "PPTelegraf-Regular",
+    fontSize: 18,
   },
   footerLink: {
-    color: "#78B7BB",
-    fontWeight: "600",
-    fontSize: 20,
-    marginTop: 6,
+    color: "#8A4F1C",
+    fontFamily: "PPTelegraf-Bold",
+    fontSize: 22,
+    marginVertical: 8,
   },
 });

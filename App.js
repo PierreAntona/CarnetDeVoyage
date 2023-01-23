@@ -7,14 +7,17 @@ import { useCallback } from "react";
 import Connexion from "./src/screens/Connexion";
 import Home from "./src/screens/Home";
 
-SplashScreen.preventAutoHideAsync();
+//SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
 
   const [fontsLoaded] = useFonts({
-    DancingScript: require('./assets/fonts/DancingScript.ttf')
+    'PollerOne': require('./assets/fonts/PollerOne-Regular.ttf'),
+    'PPTelegraf-Regular': require('./assets/fonts/PPTelegraf-Regular.otf'),
+    'PPTelegraf-Bold': require('./assets/fonts/PPTelegraf-UltraBold.otf'),
+    'PPTelegraf-Light': require('./assets/fonts/PPTelegraf-UltraLight.otf')
   })
 
   const onLayoutRootView = useCallback(async () => {
