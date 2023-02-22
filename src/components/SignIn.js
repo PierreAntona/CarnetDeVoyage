@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     fontFamily: "PPTelegraf-Regular"
   },
   label: {
-    alignSelf: "left",
+    alignSelf: "flex-start",
     color: "#808B97",
     marginBottom: 6,
     marginLeft: "8%",

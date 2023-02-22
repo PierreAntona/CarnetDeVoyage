@@ -7,7 +7,6 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
-  RootTagContext,
 } from "react-native";
 
 import SignIn from "../components/SignIn";

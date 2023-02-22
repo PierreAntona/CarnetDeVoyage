@@ -25,7 +25,7 @@ function SignUp({ navigation }) {
     } else {
       createUserWithEmailAndPassword(auth, adress, password)
         .then(() => {
-          setDoc(doc(db, adress, "Utilisateur"), { Nom: username });
+          setDoc(doc(db, adress, "user"), { name: username, travels: [] });
           navigation.navigate("Home", adress);
         })
         .catch((e) => {
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     fontFamily: "PPTelegraf-Regular",
   },
   label: {
-    alignSelf: "left",
+    alignSelf: "flex-start",
     color: "#808B97",
     marginBottom: 6,
     marginLeft: "8%",

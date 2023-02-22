@@ -1,26 +1,91 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { doc, getDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
+import {
+  FlatList,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import BottomForm from "../components/BottomForm";
+import NewTravel from "../components/NewTravel";
+import TravelCard from "../components/TravelCard";
+import { db } from "../firebase/config";
+import { dateFormating } from "../utils/dateFormating";
+import { refreshTravels } from "../utils/signals";
 
 function Home({ navigation, route }) {
-  // console.log(route.params);
+  const [travels, setTravels] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    if (!travels) {
+      getTravels();
+    }
+    const showTravelsList = refreshTravels.add(refreshTravelsList);
+    return () => {
+      refreshTravels.detach(showTravelsList);
+    };
+  }, []);
+
+  const getTravels = async () => {
+    const docRef = doc(db, route.params, "user");
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      setTravels(docSnap.data().travels);
+    }
+  };
+
+  const refreshTravelsList = () => {
+    setTravels(null);
+    getTravels();
+  };
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="dark" />
       <View style={styles.header}>
         <View style={styles.title}>
-          <Image style={styles.logo} source={require("../../assets/compass.png")}/>
+          <Image
+            style={styles.logo}
+            source={require("../../assets/compass.png")}
+          />
           <Text style={styles.text}>Mes voyages</Text>
         </View>
         <TouchableOpacity>
-          <Image style={styles.params} source={require("../../assets/settings.png")}/>
+          <Image
+            style={styles.params}
+            source={require("../../assets/settings.png")}
+          />
         </TouchableOpacity>
       </View>
 
-      <TouchableOpacity style={styles.add}>
+      <FlatList
+        data={travels}
+        renderItem={({ item }) => 
+          <TravelCard
+            destination={item.destination.name}
+            start={dateFormating(item.start)}
+            end={dateFormating(item.end)}
+          />
+        }
+        keyExtractor={item => item.id}
+      />
+
+      <TouchableOpacity style={styles.add} onPress={() => setIsOpen(true)}>
         <Text style={styles.plus}>+</Text>
       </TouchableOpacity>
+
+      <BottomForm
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        children={<NewTravel setIsOpen={setIsOpen} user={route.params} />}
+        title={"Nouveau voyage"}
+      />
     </SafeAreaView>
   );
 }
@@ -37,11 +102,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 25,
-    marginVertical: 20
+    marginVertical: 20,
   },
   title: {
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: 16
   },
   logo: {
     width: 60,
@@ -49,25 +115,24 @@ const styles = StyleSheet.create({
     transform: [{ rotate: "15deg" }],
     position: "absolute",
     bottom: 10,
-    
   },
   text: {
     fontFamily: "PollerOne",
     color: "#3D7838",
     fontSize: 36,
     textShadowColor: "#FEFAE0",
-    textShadowOffset: {width: -1, height: -1},
+    textShadowOffset: { width: -1, height: -1 },
     textShadowRadius: 0,
-    marginLeft: 38
+    marginLeft: 38,
   },
   params: {
     width: 30,
-    height: 30
+    height: 30,
   },
   add: {
     border: "",
     position: "absolute",
-    zIndex: 10,
+    zIndex: 2,
     right: 25,
     bottom: 60,
     width: 60,
@@ -79,13 +144,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     shadowColor: "#8A4F1C",
     shadowRadius: 0,
-    shadowOffset: {width: 1, height: 1},
+    shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 1,
-    backgroundColor: "#FEFAE0"
+    backgroundColor: "#FEFAE0",
   },
   plus: {
     fontSize: 36,
     fontFamily: "PPTelegraf-Bold",
-    color: "#8A4F1C"
-  }
+    color: "#8A4F1C",
+  },
 });
