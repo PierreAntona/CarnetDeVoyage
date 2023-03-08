@@ -14,12 +14,15 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.pierreantona.CarnetDeVoyage"
+      "bundleIdentifier": "com.pierreantona.CarnetDeVoyage",
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowArbitraryLoads": true
+        }
+      }
     },
     "android": {
       "adaptiveIcon": {

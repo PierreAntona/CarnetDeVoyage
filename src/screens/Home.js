@@ -66,14 +66,16 @@ function Home({ navigation, route }) {
 
       <FlatList
         data={travels}
-        renderItem={({ item }) => 
+        renderItem={({ item }) => (
           <TravelCard
+            image={item.photoUrl}
             destination={item.destination.name}
             start={dateFormating(item.start)}
             end={dateFormating(item.end)}
+            place_id={item.destination.place_id}
           />
-        }
-        keyExtractor={item => item.id}
+        )}
+        keyExtractor={(item) => item.id}
       />
 
       <TouchableOpacity style={styles.add} onPress={() => setIsOpen(true)}>
@@ -107,7 +109,7 @@ const styles = StyleSheet.create({
   title: {
     flexDirection: "row",
     alignItems: "center",
-    marginBottom: 16
+    marginBottom: 16,
   },
   logo: {
     width: 60,
@@ -126,8 +128,9 @@ const styles = StyleSheet.create({
     marginLeft: 38,
   },
   params: {
-    width: 30,
-    height: 30,
+    width: 24,
+    height: 24,
+    bottom: 3,
   },
   add: {
     border: "",

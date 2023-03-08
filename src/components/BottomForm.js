@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 
-const DEFAULT_HEIGHT = 600;
+const DEFAULT_HEIGHT = 560;
 
 function useAnimatedBottom(isOpen, height = DEFAULT_HEIGHT) {
   const AnimatedValue = useRef(new Animated.Value(0));
@@ -56,7 +56,11 @@ function bottomForm({
     <>
       <Pressable
         onPress={() => setIsOpen(false)}
-        style={[styles.outerOverlay, { height: screenHeight }]}
+        style={[
+          styles.outerOverlay,
+          { height: screenHeight },
+          isOpen ? { display: "flex" } : { display: "none" },
+        ]}
       >
         <View />
       </Pressable>
@@ -89,19 +93,19 @@ const styles = StyleSheet.create({
     borderColor: "#8A4F1C",
     borderWidth: 2,
     borderRadius: 50,
-    padding: 10
+    padding: 10,
   },
   header: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 30,
-    padding: 20
+    marginBottom: 20,
+    padding: 20,
   },
   title: {
     fontFamily: "PPTelegraf-Bold",
     color: "#3D7838",
-    fontSize: 24
-  }
+    fontSize: 24,
+  },
 });
