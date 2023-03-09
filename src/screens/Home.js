@@ -68,11 +68,11 @@ function Home({ navigation, route }) {
         data={travels}
         renderItem={({ item }) => (
           <TravelCard
-            image={item.photoUrl}
-            destination={item.destination.name}
+            navigation={navigation}
+            user={route.params}
+            destination={item}
             start={dateFormating(item.start)}
             end={dateFormating(item.end)}
-            place_id={item.destination.place_id}
           />
         )}
         keyExtractor={(item) => item.id}

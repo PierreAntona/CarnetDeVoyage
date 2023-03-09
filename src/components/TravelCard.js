@@ -1,46 +1,29 @@
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { GOOGLE_PLACES_API_KEY, FREE_CURRENCY_API } from "@env";
+import { FREE_CURRENCY_API } from "@env";
 import axios from "axios";
-import countryToCurrency from "country-to-currency";
 
-function TravelCard({ destination, start, end, image, place_id }) {
+function TravelCard({ navigation, user, destination, start, end }) {
   const [isVerso, setIsVerso] = useState(false);
-  const [timeZone, setTimeZone] = useState();
-  const [country, setCountry] = useState();
-  const [currency, setCurrency] = useState();
+  const [exchangeRate, setExchangeRate] = useState("");
 
   useEffect(() => {
-    if (!country) {
-      axios(configTimezone)
-        .then((res) => {
-          setTimeZone(parseInt(res.data.result.utc_offset - 60) / 60);
-          res.data.result.address_components.forEach((element) => {
-            if (element.types[0] === "country")
-              setCountry(countryToCurrency[element.short_name]);
-          });
-        })
-        .catch((e) => console.log(e));
+    if (exchangeRate === "") {
+      if (destination.currency !== "EUR") {
+        axios(configCurrency)
+          .then((res) => {
+            setExchangeRate(Object.values(res.data.data)[0].toFixed(2));
+          })
+          .catch((e) => console.log(e));
+      } else {
+        setExchangeRate("1");
+      }
     }
-
-    // if (!currency) {
-    //   axios(configCurrency)
-    //     .then((res) => {
-    //       console.log(res);
-    //     })
-    //     .catch((e) => console.log(e));
-    // }
-  }, [country, currency]);
-
-  const configTimezone = {
-    method: "get",
-    url: `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place_id}&key=${GOOGLE_PLACES_API_KEY}`,
-    Headers: {},
-  };
+  }, [destination.currency]);
 
   const configCurrency = {
     method: "get",
-    url: `https://api.freecurrencyapi.com/v1/latest?apikey=${FREE_CURRENCY_API}&currencies=USD%2EUR%2${country}`,
+    url: `https://api.freecurrencyapi.com/v1/latest?apikey=${FREE_CURRENCY_API}&currencies=${destination.currency}&base_currency=EUR`,
     Headers: {},
   };
 
@@ -50,10 +33,10 @@ function TravelCard({ destination, start, end, image, place_id }) {
         style={[styles.container, { backgroundColor: "#FEFAE0" }]}
         onPress={() => setIsVerso(!isVerso)}
       >
-        <Image style={styles.image} source={{ uri: image }} />
+        <Image style={styles.image} source={{ uri: destination.photoUrl }} />
         <View style={styles.header}>
           <Text style={[styles.title, { color: "#3D7838" }]}>
-            {destination}
+            {destination.destination.name}
           </Text>
           <Text style={[styles.date, { color: "#234520" }]}>
             <Text style={styles.lightText}>Du </Text>
@@ -74,7 +57,7 @@ function TravelCard({ destination, start, end, image, place_id }) {
       >
         <View style={styles.header}>
           <Text style={[styles.title, { color: "#FEFAE0" }]}>
-            {destination}
+            {destination.destination.name}
           </Text>
           <Text style={[styles.date, { color: "#FEFAE0" }]}>
             <Text style={styles.lightText}>Du </Text>
@@ -90,7 +73,7 @@ function TravelCard({ destination, start, end, image, place_id }) {
               style={styles.icon}
             />
             <Text style={styles.informations}>
-              {timeZone} heure(s) de différence avec la France
+              {destination.timezone} heure(s) de différence avec la France
             </Text>
           </View>
           <View style={styles.informationsRow}>
@@ -98,13 +81,33 @@ function TravelCard({ destination, start, end, image, place_id }) {
               source={require("../../assets/icon_currency.png")}
               style={styles.icon}
             />
-            <Text style={styles.informations}>1 EUR vaut {country}</Text>
+            <Text style={styles.informations}>
+              {exchangeRate === "1"
+                ? "La devise utilisée est l'euro"
+                : `1 EUR vaut ${exchangeRate} ${destination.currency}`}
+            </Text>
           </View>
           <View style={styles.buttons}>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() =>
+                navigation.navigate("Planning", {
+                  destination: destination.destination.name,
+                  user: user,
+                })
+              }
+            >
               <Text style={styles.buttonText}>Planification</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() =>
+                navigation.navigate("Memories", {
+                  destination: destination.destination.name,
+                  user: user,
+                })
+              }
+            >
               <Text style={styles.buttonText}>Souvenirs</Text>
             </TouchableOpacity>
           </View>

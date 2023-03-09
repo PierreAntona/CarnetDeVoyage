@@ -8,6 +8,8 @@ import "react-native-url-polyfill/auto";
 
 import Connexion from "./src/screens/Connexion";
 import Home from "./src/screens/Home";
+import Planning from "./src/screens/Planning";
+import Memories from "./src/screens/Memories";
 
 //SplashScreen.preventAutoHideAsync();
 
@@ -43,6 +45,16 @@ export default function App() {
           options={{ headerShown: false }}
           name="Home"
           component={Home}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Planning"
+          component={Planning}
+        />
+        <Stack.Screen
+          options={{ headerShown: false }}
+          name="Memories"
+          component={Memories}
         />
       </Stack.Navigator>
     </NavigationContainer>
