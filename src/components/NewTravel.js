@@ -14,7 +14,7 @@ import DatePicker from "react-native-date-picker";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_PLACES_API_KEY, UNSPLASH_ACCESS_KEY } from "@env";
 import { createApi } from "unsplash-js";
-import { dateFormating } from "../utils/dateFormating";
+import { digitalDate } from "../utils/dateFormating";
 import { refreshTravels } from "../utils/signals";
 
 function NewTravel({ user, setIsOpen }) {
@@ -171,7 +171,7 @@ function NewTravel({ user, setIsOpen }) {
       <Text style={styles.label}>Date début</Text>
       <TextInput
         style={styles.input}
-        value={dateFormating(startDate)}
+        value={digitalDate(startDate)}
         onFocus={() => setOpenStartDateModal(true)}
         placeholder="00/00/0000"
       />
@@ -197,7 +197,7 @@ function NewTravel({ user, setIsOpen }) {
       <Text style={styles.label}>Date fin</Text>
       <TextInput
         style={styles.input}
-        value={dateFormating(endDate)}
+        value={digitalDate(endDate)}
         onFocus={() => setOpenEndDateModal(true)}
         placeholder="00/00/0000"
       />

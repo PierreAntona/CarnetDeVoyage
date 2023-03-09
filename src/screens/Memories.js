@@ -3,7 +3,7 @@ import { SafeAreaView, StyleSheet, Text } from "react-native";
 function Memories({ route }) {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>MEMORIES {route.params}</Text>
+      <Text>MEMORIES {route.params.destination}</Text>
     </SafeAreaView>
   );
 }

@@ -14,7 +14,7 @@ import BottomForm from "../components/BottomForm";
 import NewTravel from "../components/NewTravel";
 import TravelCard from "../components/TravelCard";
 import { db } from "../firebase/config";
-import { dateFormating } from "../utils/dateFormating";
+import { digitalDate } from "../utils/dateFormating";
 import { refreshTravels } from "../utils/signals";
 
 function Home({ navigation, route }) {
@@ -71,8 +71,8 @@ function Home({ navigation, route }) {
             navigation={navigation}
             user={route.params}
             destination={item}
-            start={dateFormating(item.start)}
-            end={dateFormating(item.end)}
+            start={digitalDate(item.start)}
+            end={digitalDate(item.end)}
           />
         )}
         keyExtractor={(item) => item.id}

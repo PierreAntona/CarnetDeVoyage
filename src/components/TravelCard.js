@@ -7,19 +7,19 @@ function TravelCard({ navigation, user, destination, start, end }) {
   const [isVerso, setIsVerso] = useState(false);
   const [exchangeRate, setExchangeRate] = useState("");
 
-  useEffect(() => {
-    if (exchangeRate === "") {
-      if (destination.currency !== "EUR") {
-        axios(configCurrency)
-          .then((res) => {
-            setExchangeRate(Object.values(res.data.data)[0].toFixed(2));
-          })
-          .catch((e) => console.log(e));
-      } else {
-        setExchangeRate("1");
-      }
-    }
-  }, [destination.currency]);
+  // useEffect(() => {
+  //   if (exchangeRate === "") {
+  //     if (destination.currency !== "EUR") {
+  //       axios(configCurrency)
+  //         .then((res) => {
+  //           setExchangeRate(Object.values(res.data.data)[0].toFixed(2));
+  //         })
+  //         .catch((e) => console.log(e));
+  //     } else {
+  //       setExchangeRate("1");
+  //     }
+  //   }
+  // }, [destination.currency]);
 
   const configCurrency = {
     method: "get",
