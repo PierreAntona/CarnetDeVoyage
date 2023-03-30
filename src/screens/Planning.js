@@ -82,14 +82,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   title: {
-    fontFamily: "PollerOne",
     color: "#3D7838",
     fontSize: 36,
     marginLeft: 20,
   },
   checklistButton: {
     textAlign: "center",
-    fontFamily: "PPTelegraf-Regular",
     fontSize: 20,
     color: "#8A4F1C",
     textDecorationStyle: "solid",
@@ -98,7 +96,6 @@ const styles = StyleSheet.create({
     marginVertical: 8,
   },
   date: {
-    fontFamily: "PPTelegraf-Bold",
     fontSize: 16,
     color: "#3D7838",
     textAlign: "center",
@@ -125,7 +122,6 @@ const styles = StyleSheet.create({
   },
   plus: {
     fontSize: 36,
-    fontFamily: "PPTelegraf-Bold",
     color: "#8A4F1C",
   },
 });

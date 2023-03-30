@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   title: {
-    fontFamily: "PPTelegraf-Bold",
     color: "#3D7838",
     fontSize: 24,
   },

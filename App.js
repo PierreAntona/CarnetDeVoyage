@@ -1,35 +1,41 @@
 import "expo-dev-client";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
-import { useCallback } from "react";
 import "react-native-url-polyfill/auto";
-
 import Connexion from "./src/screens/Connexion";
 import Home from "./src/screens/Home";
 import Planning from "./src/screens/Planning";
 import Memories from "./src/screens/Memories";
-
-//SplashScreen.preventAutoHideAsync();
+import useFonts from "./src/hooks/useFonts";
+import { useCallback, useEffect, useState } from "react";
+import * as SplashScreen from "expo-splash-screen";
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [fontsLoaded] = useFonts({
-    PollerOne: require("./assets/fonts/PollerOne-Regular.ttf"),
-    "PPTelegraf-Regular": require("./assets/fonts/PPTelegraf-Regular.otf"),
-    "PPTelegraf-Bold": require("./assets/fonts/PPTelegraf-UltraBold.otf"),
-    "PPTelegraf-Light": require("./assets/fonts/PPTelegraf-UltraLight.otf"),
-  });
+  const [appIsReady, setAppIsReady] = useState(false);
+
+  useEffect(() => {
+    async function prepare() {
+      try {
+        await useFonts();
+      } catch (e) {
+        console.warn(e);
+      } finally {
+        setAppIsReady(true);
+      }
+    }
+
+    prepare();
+  }, []);
 
   const onLayoutRootView = useCallback(async () => {
-    if (fontsLoaded) {
+    if (appIsReady) {
       await SplashScreen.hideAsync();
     }
-  }, [fontsLoaded]);
+  }, [appIsReady]);
 
-  if (!fontsLoaded) {
+  if (!appIsReady) {
     return null;
   }
 

@@ -6,7 +6,6 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
-  Image,
 } from "react-native";
 
 import SignIn from "../components/SignIn";
@@ -17,14 +16,10 @@ function Connexion({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <View style={styles.header}>
-        <Image
-          style={styles.logo}
-          source={require("../../assets/compass.png")}
-        />
-        <Text style={styles.title}>Carnet</Text>
-        <Text style={styles.title}>de voyage</Text>
+        <Text style={styles.title}>Cahier</Text>
+        <Text style={styles.title}>De Voyage</Text>
       </View>
       {alreadyHaveAccount ? (
         <SignIn navigation={navigation} />
@@ -32,21 +27,19 @@ function Connexion({ navigation }) {
         <SignUp navigation={navigation} />
       )}
       {alreadyHaveAccount ? (
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>
-            Vous n'êtes pas encore inscrit ?
-          </Text>
-          <TouchableOpacity onPress={() => setAlreadyHaveAccount(false)}>
-            <Text style={styles.footerLink}>Créer un compte</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          style={styles.footer}
+          onPress={() => setAlreadyHaveAccount(false)}
+        >
+          <Text style={styles.footerText}>Inscription</Text>
+        </TouchableOpacity>
       ) : (
-        <View style={styles.footer}>
-          <Text style={styles.footerText}>Vous possédez déjà un compte ?</Text>
-          <TouchableOpacity onPress={() => setAlreadyHaveAccount(true)}>
-            <Text style={styles.footerLink}>Se connecter</Text>
-          </TouchableOpacity>
-        </View>
+        <TouchableOpacity
+          onPress={() => setAlreadyHaveAccount(true)}
+          style={styles.footer}
+        >
+          <Text style={styles.footerText}>Connexion</Text>
+        </TouchableOpacity>
       )}
     </SafeAreaView>
   );
@@ -58,38 +51,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    backgroundColor: "#FEFAE0",
+    backgroundColor: "#1E1E1E",
   },
   header: {
-    alignItems: "center",
-  },
-  logo: {
-    width: 100,
-    height: 100,
-    marginVertical: 8,
-    transform: [{ rotate: "15deg" }],
+    paddingHorizontal: 18,
+    marginTop: 12,
   },
   title: {
-    fontSize: 48,
-    fontWeight: "600",
-    color: "#3D7838",
-    textAlign: "center",
-    lineHeight: 48,
-    fontFamily: "PollerOne",
-    marginBottom: -4,
+    fontSize: 64,
+    color: "#E5CA93",
+    fontFamily: "Playfair-Black",
+    lineHeight: 68,
   },
   footer: {
     alignItems: "center",
+    backgroundColor: "#E5CA93",
+    paddingVertical: 20,
   },
   footerText: {
-    color: "#234520",
-    fontFamily: "PPTelegraf-Regular",
-    fontSize: 18,
-  },
-  footerLink: {
-    color: "#8A4F1C",
-    fontFamily: "PPTelegraf-Bold",
-    fontSize: 22,
-    marginVertical: 8,
+    fontSize: 20,
+    fontFamily: "Playfair-Regular",
   },
 });

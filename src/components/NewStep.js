@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import { Entypo } from "@expo/vector-icons";
 
@@ -7,6 +7,7 @@ function NewStep({ user, setIsOpen }) {
   const [stepType, setStepType] = useState();
   const [departureAirport, setDepartureAirport] = useState("");
   const [arrivalAirport, setArrivalAirport] = useState("");
+  const [error, setError] = useState(null);
 
   const types = [
     "Vol",
@@ -30,15 +31,29 @@ function NewStep({ user, setIsOpen }) {
         <Text style={styles.label}>Aéroport d'arrivé</Text>
         <TextInput
           style={styles.input}
-          value={arrivalAirport}
+          value={""}
           placeholder="Sydney Airport"
           onChangeText={setArrivalAirport}
+        />
+        <Text style={styles.label}>Heure de départ</Text>
+        <TextInput
+          style={styles.input}
+          value={arrivalAirport}
+          placeholder="00:00"
+          onChangeText={""}
+        />
+        <Text style={styles.label}>Heure d'arrivé</Text>
+        <TextInput
+          style={styles.input}
+          value={""}
+          placeholder="00:00"
+          onChangeText={""}
         />
       </>
     );
   };
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.label}>Type d'étape</Text>
       <SelectDropdown
         data={types}
@@ -82,7 +97,11 @@ function NewStep({ user, setIsOpen }) {
         }}
       />
       {stepType === 0 && <FlightForm />}
-    </View>
+      {error && <Text style={styles.error}>{error}</Text>}
+      <TouchableOpacity onPress={() => setUpTravel()} style={styles.button}>
+        <Text style={styles.buttonText}>Ajouter</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
 }
 
@@ -99,7 +118,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontSize: 20,
     fontWeight: "500",
-    fontFamily: "PPTelegraf-Regular",
     color: "#234520",
   },
   input: {
@@ -112,6 +130,27 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginBottom: 24,
     color: "#234520",
-    fontFamily: "PPTelegraf-Regular",
+  },
+  error: {
+    color: "red",
+    textAlign: "center",
+  },
+    button: {
+    borderRadius: 6,
+    borderColor: "#8A4F1C",
+    borderWidth: 2,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 180,
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: 20,
+    marginBottom: 20,
+  },
+  buttonText: {
+    color: "#8A4F1C",
+    fontWeight: "600",
+    fontSize: 18,
   },
 });

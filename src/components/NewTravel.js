@@ -145,7 +145,6 @@ function NewTravel({ user, setIsOpen }) {
             borderRadius: 6,
             color: "#234520",
             fontSize: 18,
-            fontFamily: "PPTelegraf-Regular",
           },
           poweredContainer: {
             display: "none",
@@ -164,7 +163,6 @@ function NewTravel({ user, setIsOpen }) {
           description: {
             color: "#234520",
             fontSize: 18,
-            fontFamily: "PPTelegraf-Regular",
           },
         }}
       />
@@ -245,7 +243,6 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     marginBottom: 24,
     color: "#234520",
-    fontFamily: "PPTelegraf-Regular",
   },
   label: {
     alignSelf: "flex-start",
@@ -253,7 +250,6 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontSize: 20,
     fontWeight: "500",
-    fontFamily: "PPTelegraf-Regular",
     color: "#234520",
   },
   error: {
@@ -276,7 +272,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#8A4F1C",
     fontWeight: "600",
-    fontFamily: "PPTelegraf-Bold",
     fontSize: 18,
   },
 });

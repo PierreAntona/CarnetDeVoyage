@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FREE_CURRENCY_API } from "@env";
+// import { LinearGradient } from 'expo-linear-gradient';
 import axios from "axios";
 
 function TravelCard({ navigation, user, destination, start, end }) {
   const [isVerso, setIsVerso] = useState(false);
   const [exchangeRate, setExchangeRate] = useState("");
+  const [destinationNameWidth, setDestinationNameWidth] = useState(0);
 
   useEffect(() => {
     if (exchangeRate === "") {
@@ -30,21 +32,29 @@ function TravelCard({ navigation, user, destination, start, end }) {
   const RectoCard = () => {
     return (
       <TouchableOpacity
-        style={[styles.container, { backgroundColor: "#FEFAE0" }]}
+        style={styles.container}
         onPress={() => setIsVerso(!isVerso)}
       >
+        <Text
+          onLayout={(e) => setDestinationNameWidth(e.nativeEvent.layout.width)}
+          numberOfLines={2}
+          style={[
+            styles.destinationName,
+            {
+              transform: [
+                { translateX: -1 * (destinationNameWidth / 2) },
+                { rotate: "-90deg" },
+                { translateX: destinationNameWidth / 2 },
+              ],
+            },
+          ]}
+        >
+          {destination.destination.name}
+        </Text>
+        {/* <LinearGradient 
+          colors={["#100D05", "rgba(16, 13, 5, 0)"]}
+        /> */}
         <Image style={styles.image} source={{ uri: destination.photoUrl }} />
-        <View style={styles.header}>
-          <Text style={[styles.title, { color: "#3D7838" }]}>
-            {destination.destination.name}
-          </Text>
-          <Text style={[styles.date, { color: "#234520" }]}>
-            <Text style={styles.lightText}>Du </Text>
-            {start}
-            <Text style={styles.lightText}> au </Text>
-            {end}
-          </Text>
-        </View>
       </TouchableOpacity>
     );
   };
@@ -68,19 +78,11 @@ function TravelCard({ navigation, user, destination, start, end }) {
         </View>
         <View style={styles.bottomPart}>
           <View style={styles.informationsRow}>
-            <Image
-              source={require("../../assets/icon_time.png")}
-              style={styles.icon}
-            />
             <Text style={styles.informations}>
               {destination.timezone} heure(s) de différence avec la France
             </Text>
           </View>
           <View style={styles.informationsRow}>
-            <Image
-              source={require("../../assets/icon_currency.png")}
-              style={styles.icon}
-            />
             <Text style={styles.informations}>
               {exchangeRate === "1"
                 ? "La devise utilisée est l'euro"
@@ -123,36 +125,21 @@ export default TravelCard;
 
 const styles = StyleSheet.create({
   container: {
-    borderColor: "#3D7838",
-    borderWidth: 1,
-    borderRadius: 10,
-    marginHorizontal: 30,
-    marginBottom: 30,
-    shadowColor: "#3D7838",
-    shadowRadius: 0,
-    shadowOffset: { width: 3, height: 3 },
-    shadowOpacity: 1,
-  },
-  header: {
-    padding: 10,
+    marginBottom: 34,
   },
   image: {
     width: "100%",
-    height: 105,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    height: 155,
   },
-  title: {
-    fontFamily: "PPTelegraf-Bold",
-    fontSize: 24,
-    paddingBottom: 10,
-  },
-  date: {
-    fontFamily: "PPTelegraf-Regular",
-    fontSize: 16,
-  },
-  lightText: {
-    fontFamily: "PPTelegraf-Light",
+  destinationName: {
+    color: "#FFF",
+    position: "absolute",
+    bottom: -35,
+    maxWidth: 155,
+    left: 18,
+    zIndex: 10,
+    fontFamily: "Playfair-Bold",
+    fontSize: 36,
   },
   bottomPart: {
     height: 105,
@@ -170,11 +157,6 @@ const styles = StyleSheet.create({
   informations: {
     color: "#234520",
   },
-  icon: {
-    width: 20,
-    height: 20,
-    marginRight: 6,
-  },
   buttons: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -190,7 +172,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "#3D7838",
-    fontFamily: "PPTelegraf-Bold",
     fontSize: 16,
   },
 });

@@ -3,7 +3,6 @@ import { doc, getDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import {
   FlatList,
-  Image,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -47,21 +46,9 @@ function Home({ navigation, route }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <View style={styles.header}>
-        <View style={styles.title}>
-          <Image
-            style={styles.logo}
-            source={require("../../assets/compass.png")}
-          />
-          <Text style={styles.text}>Mes voyages</Text>
-        </View>
-        <TouchableOpacity>
-          <Image
-            style={styles.params}
-            source={require("../../assets/settings.png")}
-          />
-        </TouchableOpacity>
+        <Text style={styles.title}>Mes voyages</Text>
       </View>
 
       <FlatList
@@ -79,7 +66,8 @@ function Home({ navigation, route }) {
       />
 
       <TouchableOpacity style={styles.add} onPress={() => setIsOpen(true)}>
-        <Text style={styles.plus}>+</Text>
+        <Text style={styles.addText}>Nouveau voyage</Text>
+        <Text style={styles.arrow}>↑</Text>
       </TouchableOpacity>
 
       <BottomForm
@@ -96,64 +84,35 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#FEFAE0",
+    backgroundColor: "#100D05",
     flex: 1,
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingHorizontal: 25,
-    marginVertical: 20,
+    marginBottom: 40,
+    paddingHorizontal: 18,
   },
   title: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: 16,
-  },
-  logo: {
-    width: 60,
-    height: 60,
-    transform: [{ rotate: "15deg" }],
-    position: "absolute",
-    bottom: 10,
-  },
-  text: {
-    fontFamily: "PollerOne",
-    color: "#3D7838",
-    fontSize: 36,
-    textShadowColor: "#FEFAE0",
-    textShadowOffset: { width: -1, height: -1 },
-    textShadowRadius: 0,
-    marginLeft: 38,
-  },
-  params: {
-    width: 24,
-    height: 24,
-    bottom: 3,
+    fontFamily: "Playfair-Black",
+    fontSize: 56,
+    color: "#E5CA93",
   },
   add: {
-    border: "",
     position: "absolute",
     zIndex: 2,
-    right: 25,
+    right: 18,
     bottom: 60,
-    width: 60,
-    height: 60,
-    borderColor: "#8A4F1C",
-    borderWidth: 3,
-    borderRadius: 15,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#8A4F1C",
-    shadowRadius: 0,
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 1,
-    backgroundColor: "#FEFAE0",
+    flexDirection: "row",
+    justifyContent: "center"
   },
-  plus: {
-    fontSize: 36,
-    fontFamily: "PPTelegraf-Bold",
-    color: "#8A4F1C",
+  addText: {
+    fontSize: 20,
+    color: "#E5CA93",
+    fontFamily: "Playfair-Regular",
   },
+  arrow: {
+    color: "#E5CA93",
+    fontSize: 20,
+    fontFamily: "NotoSans-Light",
+    marginLeft: 10
+  }
 });

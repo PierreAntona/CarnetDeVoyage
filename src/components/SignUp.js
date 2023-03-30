@@ -44,43 +44,44 @@ function SignUp({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Nom d'utilisateur</Text>
       <TextInput
         style={styles.input}
         onChangeText={(text) => setUsername(text)}
         value={username}
         autoCapitalize="none"
-        placeholder="Aventurier123"
+        placeholder="Nom d'utilisateur"
+        placeholderTextColor="rgba(229, 202, 147, 0.35)"
       />
-      <Text style={styles.label}>Adresse e-mail</Text>
       <TextInput
         style={styles.input}
         onChangeText={(text) => setAdress(text)}
         value={adress}
         autoCapitalize="none"
-        placeholder="exemple@mail.fr"
+        placeholder="Adresse e-mail"
+        placeholderTextColor="rgba(229, 202, 147, 0.35)"
       />
-      <Text style={styles.label}>Mot de passe</Text>
       <TextInput
         style={styles.input}
         onChangeText={(text) => setPassword(text)}
         value={password}
         secureTextEntry
         autoCapitalize="none"
-        placeholder="••••••••••••"
+        placeholder="Mot de passe"
+        placeholderTextColor="rgba(229, 202, 147, 0.35)"
       />
-      <Text style={styles.label}>Confimer le mot de passe</Text>
       <TextInput
         style={styles.input}
         onChangeText={(text) => setConfirmPassword(text)}
         value={confirmPassword}
         secureTextEntry
         autoCapitalize="none"
-        placeholder="••••••••••••"
+        placeholder="Confimer le mot de passe"
+        placeholderTextColor="rgba(229, 202, 147, 0.35)"
       />
       {error && <Text style={styles.error}>{error}</Text>}
       <TouchableOpacity onPress={() => register()} style={styles.button}>
         <Text style={styles.buttonText}>Inscription</Text>
+        <Text style={styles.arrow}>→</Text>
       </TouchableOpacity>
     </View>
   );
@@ -93,50 +94,40 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: "10%",
+    marginHorizontal: 18,
   },
   input: {
-    borderWidth: 1,
-    borderColor: "#234520",
-    height: 50,
-    width: "84%",
+    borderBottomWidth: 1,
+    borderBottomColor: "#E5CA93",
     fontSize: 18,
-    paddingLeft: 8,
-    borderRadius: 4,
     marginBottom: 18,
-    color: "#234520",
-    fontFamily: "PPTelegraf-Regular",
-  },
-  label: {
-    alignSelf: "flex-start",
-    color: "#808B97",
-    marginBottom: 6,
-    marginLeft: "8%",
-    fontSize: 18,
-    fontWeight: "500",
-    fontFamily: "PPTelegraf-Regular",
-    color: "#234520",
+    fontFamily: "NotoSans-Light",
+    width: "100%",
+    color: "#E5CA93",
+    marginBottom: 50,
+    height: 50,
   },
   error: {
     color: "red",
     textAlign: "center",
+    fontFamily: "NotoSans-Light",
+    marginBottom: 20,
   },
   button: {
-    borderRadius: 6,
-    borderColor: "#8A4F1C",
-    borderWidth: 2,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    width: 180,
-    marginLeft: "auto",
-    marginRight: "auto",
+    alignSelf: "flex-end",
     marginTop: 20,
+    flexDirection: "row",
+    justifyContent: "center"
   },
   buttonText: {
-    color: "#8A4F1C",
-    fontWeight: "600",
-    fontFamily: "PPTelegraf-Bold",
-    fontSize: 18,
+    color: "#E5CA93",
+    fontSize: 20,
+    fontFamily: "Playfair-Regular",
   },
+  arrow: {
+    color: "#E5CA93",
+    fontSize: 20,
+    fontFamily: "NotoSans-Light",
+    marginLeft: 10
+  }
 });
