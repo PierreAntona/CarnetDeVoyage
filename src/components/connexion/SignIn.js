@@ -1,5 +1,5 @@
 import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
-import { app } from "../firebase/config";
+import { app } from "../../firebase/config";
 import React, { useState } from "react";
 import {
   StyleSheet,

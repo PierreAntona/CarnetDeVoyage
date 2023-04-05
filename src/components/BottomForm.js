@@ -7,11 +7,9 @@ import {
   Pressable,
   View,
   Text,
-  TouchableOpacity,
 } from "react-native";
-import { Entypo } from "@expo/vector-icons";
 
-const DEFAULT_HEIGHT = 560;
+const DEFAULT_HEIGHT = 500;
 
 function useAnimatedBottom(isOpen, height = DEFAULT_HEIGHT) {
   const AnimatedValue = useRef(new Animated.Value(0));
@@ -42,7 +40,7 @@ function useAnimatedBottom(isOpen, height = DEFAULT_HEIGHT) {
   return bottom;
 }
 
-function bottomForm({
+function BottomForm({
   isOpen,
   setIsOpen,
   height = DEFAULT_HEIGHT,
@@ -67,9 +65,6 @@ function bottomForm({
       <Animated.View style={[styles.container, { height, bottom }]}>
         <View style={styles.header}>
           <Text style={styles.title}>{title}</Text>
-          <TouchableOpacity onPress={() => setIsOpen(false)}>
-            <Entypo name="chevron-down" size={36} color="#8A4F1C" />
-          </TouchableOpacity>
         </View>
         {children}
       </Animated.View>
@@ -77,7 +72,7 @@ function bottomForm({
   );
 }
 
-export default bottomForm;
+export default BottomForm;
 
 const styles = StyleSheet.create({
   outerOverlay: {
@@ -89,22 +84,12 @@ const styles = StyleSheet.create({
     position: "absolute",
     width: "100%",
     zIndex: 3,
-    backgroundColor: "#FEFAE0",
-    borderColor: "#8A4F1C",
-    borderWidth: 2,
-    borderRadius: 50,
-    padding: 10,
-  },
-  header: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 20,
-    padding: 20,
+    backgroundColor: "#E5CA93",
+    padding: 13,
   },
   title: {
-    color: "#3D7838",
-    fontSize: 24,
-  },
+    fontSize: 32,
+    fontFamily: 'Playfair-Regular'
+    ,marginBottom: 30
+  }
 });

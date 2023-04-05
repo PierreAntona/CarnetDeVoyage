@@ -10,11 +10,12 @@ import {
   View,
 } from "react-native";
 import BottomForm from "../components/BottomForm";
-import NewTravel from "../components/NewTravel";
+import NewTravel from "../components/forms/NewTravel";
 import TravelCard from "../components/TravelCard";
 import { db } from "../firebase/config";
 import { digitalDate } from "../utils/dateFormating";
 import { refreshTravels } from "../utils/signals";
+import { LinearGradient } from "expo-linear-gradient";
 
 function Home({ navigation, route }) {
   const [travels, setTravels] = useState(null);
@@ -52,6 +53,7 @@ function Home({ navigation, route }) {
       </View>
 
       <FlatList
+        style={styles.list}
         data={travels}
         renderItem={({ item }) => (
           <TravelCard
@@ -63,6 +65,13 @@ function Home({ navigation, route }) {
           />
         )}
         keyExtractor={(item) => item.id}
+      />
+
+      <LinearGradient
+        colors={["#100D05", "rgba(16, 13, 5, 0)"]}
+        style={styles.gradient}
+        start={{ x: 0.5, y: 0.25 }}
+        end={{ x: 0.5, y: 0 }}
       />
 
       <TouchableOpacity style={styles.add} onPress={() => setIsOpen(true)}>
@@ -88,7 +97,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    marginBottom: 40,
+    marginBottom: 30,
     paddingHorizontal: 18,
   },
   title: {
@@ -100,9 +109,9 @@ const styles = StyleSheet.create({
     position: "absolute",
     zIndex: 2,
     right: 18,
-    bottom: 60,
+    bottom: 50,
     flexDirection: "row",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   addText: {
     fontSize: 20,
@@ -113,6 +122,16 @@ const styles = StyleSheet.create({
     color: "#E5CA93",
     fontSize: 20,
     fontFamily: "NotoSans-Light",
-    marginLeft: 10
-  }
+    marginLeft: 10,
+  },
+  list: {
+    marginBottom: 40,
+  },
+  gradient: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    height: 100,
+    zIndex: 0,
+  },
 });

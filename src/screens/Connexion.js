@@ -8,8 +8,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import SignIn from "../components/SignIn";
-import SignUp from "../components/SignUp";
+import SignIn from "../components/connexion/SignIn";
+import SignUp from "../components/connexion/SignUp";
 
 function Connexion({ navigation }) {
   const [alreadyHaveAccount, setAlreadyHaveAccount] = useState(true);

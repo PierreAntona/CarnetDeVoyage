@@ -5,13 +5,13 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { Entypo } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { textDate } from "../utils/dateFormating";
 import BottomForm from "../components/BottomForm";
-import NewStep from "../components/NewStep";
+import NewStep from "../components/forms/NewStep";
+import { LinearGradient } from "expo-linear-gradient";
 
 function Planning({ navigation, route }) {
   const [travel, setTravel] = useState();
@@ -38,24 +38,39 @@ function Planning({ navigation, route }) {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Home", route.params.user)}
-        >
-          <Entypo name="chevron-left" size={36} color="#8A4F1C" />
-        </TouchableOpacity>
         <Text style={styles.title}>Planification</Text>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>
+            Ma valise pour {route.params.destination}
+          </Text>
+          <Text style={styles.arrow}>→</Text>
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity>
-        <Text style={styles.checklistButton}>
-          Ma valise pour {route.params.destination}
-        </Text>
-      </TouchableOpacity>
+
       <View style={styles.steps}>
         <Text style={styles.date}>{startDate}</Text>
       </View>
 
-      <TouchableOpacity style={styles.add} onPress={() => setIsOpen(true)}>
-        <Text style={styles.plus}>+</Text>
+      <LinearGradient
+        colors={["#100D05", "rgba(16, 13, 5, 0)"]}
+        style={styles.gradient}
+        start={{ x: 0.5, y: 0.25 }}
+        end={{ x: 0.5, y: 0 }}
+      />
+
+      <TouchableOpacity
+        style={[
+          styles.button,
+          {
+            position: "absolute",
+            zIndex: 2,
+            bottom: 50,
+          },
+        ]}
+        onPress={() => setIsOpen(true)}
+      >
+        <Text style={styles.buttonText}>Nouvelle étape</Text>
+        <Text style={styles.arrow}>↑</Text>
       </TouchableOpacity>
 
       <BottomForm
@@ -72,56 +87,38 @@ export default Planning;
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#100D05",
     flex: 1,
-    backgroundColor: "#FEFAE0",
   },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 25,
-    marginTop: 20,
+    paddingHorizontal: 18,
+    marginBottom: 30,
   },
   title: {
-    color: "#3D7838",
-    fontSize: 36,
-    marginLeft: 20,
-  },
-  checklistButton: {
-    textAlign: "center",
-    fontSize: 20,
-    color: "#8A4F1C",
-    textDecorationStyle: "solid",
-    textDecorationColor: "#8A4F1C",
-    textDecorationLine: 1,
-    marginVertical: 8,
+    fontFamily: "Playfair-Black",
+    fontSize: 56,
+    color: "#E5CA93",
   },
   date: {
-    fontSize: 16,
-    color: "#3D7838",
+    fontSize: 20,
+    fontFamily: "Playfair-Bold",
+    color: "#FFF",
     textAlign: "center",
-    marginTop: 30,
   },
-  add: {
-    border: "",
-    position: "absolute",
-    zIndex: 2,
-    right: 25,
-    bottom: 60,
-    width: 60,
-    height: 60,
-    borderColor: "#8A4F1C",
-    borderWidth: 3,
-    borderRadius: 15,
-    alignItems: "center",
+  button: {
+    alignSelf: "flex-end",
+    flexDirection: "row",
     justifyContent: "center",
-    shadowColor: "#8A4F1C",
-    shadowRadius: 0,
-    shadowOffset: { width: 1, height: 1 },
-    shadowOpacity: 1,
-    backgroundColor: "#FEFAE0",
   },
-  plus: {
-    fontSize: 36,
-    color: "#8A4F1C",
+  buttonText: {
+    color: "#E5CA93",
+    fontSize: 20,
+    fontFamily: "Playfair-Regular",
+  },
+  arrow: {
+    color: "#E5CA93",
+    fontSize: 20,
+    fontFamily: "NotoSans-Light",
+    marginLeft: 10,
   },
 });

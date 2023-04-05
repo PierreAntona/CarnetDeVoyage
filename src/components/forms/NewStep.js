@@ -1,7 +1,13 @@
 import { useState } from "react";
-import { ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
-import { Entypo } from "@expo/vector-icons";
 
 function NewStep({ user, setIsOpen }) {
   const [stepType, setStepType] = useState();
@@ -21,32 +27,28 @@ function NewStep({ user, setIsOpen }) {
   const FlightForm = () => {
     return (
       <>
-        <Text style={styles.label}>Aéroport de départ</Text>
         <TextInput
           style={styles.input}
           value={departureAirport}
-          placeholder="Paris CDG"
+          placeholder="Aéroport de départ"
           onChangeText={setDepartureAirport}
         />
-        <Text style={styles.label}>Aéroport d'arrivé</Text>
         <TextInput
           style={styles.input}
           value={""}
-          placeholder="Sydney Airport"
+          placeholder="Aéroport d'arrivé"
           onChangeText={setArrivalAirport}
         />
-        <Text style={styles.label}>Heure de départ</Text>
         <TextInput
           style={styles.input}
           value={arrivalAirport}
-          placeholder="00:00"
+          placeholder="Heure de départ"
           onChangeText={""}
         />
-        <Text style={styles.label}>Heure d'arrivé</Text>
         <TextInput
           style={styles.input}
           value={""}
-          placeholder="00:00"
+          placeholder="Heure d'arrivé"
           onChangeText={""}
         />
       </>
@@ -54,37 +56,30 @@ function NewStep({ user, setIsOpen }) {
   };
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.label}>Type d'étape</Text>
       <SelectDropdown
         data={types}
-        defaultButtonText={""}
-        buttonStyle={[styles.input, { backgroundColor: "#FEFAE0" }]}
+        defaultButtonText={"Type d'étape"}
+        buttonStyle={[styles.input, { backgroundColor: "transparent" }]}
+        dropdownOverlayColor="transparent"
         buttonTextStyle={{
-          color: "#234520",
-          fontFamily: "PPTelegraf-Regular",
+          color: "#000",
           fontSize: 18,
-        }}
-        renderDropdownIcon={(isOpened) => {
-          return (
-            <Entypo
-              name={isOpened ? "chevron-up" : "chevron-down"}
-              color={"#234520"}
-              size={24}
-            />
-          );
+          textAlign: "left",
+          marginLeft: -5,
+          fontFamily: "NotoSans-Light",
         }}
         dropdownStyle={{
-          backgroundColor: "#FEFAE0",
-          borderRadius: 6,
-          height: 225,
+          backgroundColor: "#100D05",
+          borderBottomLeftRadius: 10,
+          borderBottomRightRadius: 10
         }}
         rowStyle={{
-          borderBottomColor: "#234520",
+          borderBottomColor: "#E5CA93",
         }}
         rowTextStyle={{
-          fontFamily: "PPTelegraf-Regular",
-          fontSize: 18,
-          color: "#234520",
+          textAlign: "left",
+          fontFamily: "NotoSans-Light",
+          color: "#E5CA93",
         }}
         onSelect={(selectedItem, index) => {
           setStepType(index);
@@ -98,8 +93,9 @@ function NewStep({ user, setIsOpen }) {
       />
       {stepType === 0 && <FlightForm />}
       {error && <Text style={styles.error}>{error}</Text>}
-      <TouchableOpacity onPress={() => setUpTravel()} style={styles.button}>
+      <TouchableOpacity style={styles.button}>
         <Text style={styles.buttonText}>Ajouter</Text>
+        <Text style={styles.arrow}>→</Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -109,48 +105,35 @@ export default NewStep;
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 20,
     flex: 1,
-  },
-  label: {
-    alignSelf: "flex-start",
-    color: "#808B97",
-    marginBottom: 8,
-    fontSize: 20,
-    fontWeight: "500",
-    color: "#234520",
+    marginBottom: 40
   },
   input: {
-    borderWidth: 1,
-    borderColor: "#234520",
-    height: 50,
-    width: "100%",
+    borderBottomWidth: 1,
     fontSize: 18,
-    paddingLeft: 14,
-    borderRadius: 6,
-    marginBottom: 24,
-    color: "#234520",
+    marginBottom: 18,
+    fontFamily: "NotoSans-Light",
+    width: "100%",
+    marginBottom: 50,
+    height: 50,
   },
   error: {
     color: "red",
     textAlign: "center",
   },
-    button: {
-    borderRadius: 6,
-    borderColor: "#8A4F1C",
-    borderWidth: 2,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    width: 180,
-    marginLeft: "auto",
-    marginRight: "auto",
+  button: {
+    alignSelf: "flex-end",
     marginTop: 20,
-    marginBottom: 20,
+    flexDirection: "row",
+    justifyContent: "center",
   },
   buttonText: {
-    color: "#8A4F1C",
-    fontWeight: "600",
-    fontSize: 18,
+    fontSize: 20,
+    fontFamily: "Playfair-Regular",
+  },
+  arrow: {
+    fontSize: 20,
+    fontFamily: "NotoSans-Light",
+    marginLeft: 10,
   },
 });
