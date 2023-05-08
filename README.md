@@ -4,53 +4,52 @@
   <a href="https://github.com/PierreAntona/CarnetDeVoyage">
     <img src="./assets/logo.png" alt="Logo" width="302.5" height="116">
   </a>
-
-  <p align="center">
-    Le Carnet De Voyage numérique.
-    <br />
-    <br />  
-    ·  
-    <a href="https://github.com/PierreAntona">Pierre Antona</a>
-    ·
-  </p>
 </div>
 
 <!-- À PROPOS DU PROJET -->
 
 ## À propos du projet
 
-![Carnet De Voyage screenshot][carnet_de_voyage-screenshot]
-
 Carnet De Voyage est une application mobile inspirée des carnets de voyage papier permettant de planifier son voyage et d'y associer des souvenirs.
+
+<div style="display:flex; flex-direction:space-around;">
+  <img src="./assets/screenshot-1.png" width="167" height="362">
+  <img src="./assets/screenshot-2.png" width="167" height="362">
+  <img src="./assets/screenshot-3.png" width="167" height="362">
+</div>
+
+![Carnet De Voyage screenshot 1][carnet_de_voyage-screenshot-1]
+![Carnet De Voyage screenshot 2][carnet_de_voyage-screenshot-2]
+![Carnet De Voyage screenshot 2][carnet_de_voyage-screenshot-3]
 
 <!-- FONCTIONNALITÉS -->
 
 ### Fonctionnalités
 
+L'application permet de se créer un compte sur lequel on peut sauvegarder ses voyages.
+Chaque voyage est divisé en deux parties :
+
 - Planification
+
   - Transports
   - Hébergement
-  - Visite
-  - Fuseau horaire
-  - Devise
-  - Valise
+  - Visites
+  - Choses à emporter
 
 - Souvenirs
+
   - Photographies
   - Notes
   - Statistiques
 
-### Orientations techniques
+L'application donne également des informations en fonction de la destination comme le fuseau horaire ou encore le taux de change et la devise.
 
-Application faite avec :
+### Choix techniques
 
-- [![React Native][react_native.js]][react_native-url]
+- [![React Native][react_native.com]][react_native-url]
 - [![Firebase][firebase.com]][firebase-url]
 - [![Expo][expo.com]][expo-url]
 - [![Axios][axios.com]][axios-url]
-
-API utlisées : 
-
 - [![Google Maps][google_maps.com]][google_maps-url]
 - [![Unsplash][unsplash.com]][unsplash-url]
 
@@ -62,8 +61,9 @@ Cette application s'adresse aux voyageurs en solo ou à plusieurs aimant être o
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[carnet_de_voyage-screenshot]: ./assets/screenshot.png
-
+[carnet_de_voyage-screenshot-1]: ./assets/screenshot-1.png
+[carnet_de_voyage-screenshot-2]: ./assets/screenshot-2.png
+[carnet_de_voyage-screenshot-3]: ./assets/screenshot-3.png
 [react_native.com]: https://img.shields.io/badge/React_Native-282c34?style=for-the-badge&logo=react&logoColor=#61DAFB
 [react_native-url]: https://reactnative.dev/
 [firebase.com]: https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=firebase&logoColor=FFCA28
@@ -72,8 +72,7 @@ Cette application s'adresse aux voyageurs en solo ou à plusieurs aimant être o
 [expo-url]: https://expo.dev/
 [axios.com]: https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white
 [axios-url]: https://axios-http.com/
-
 [unsplash.com]: https://img.shields.io/badge/Unsplash-#000000?style=for-the-badge&logo=unsplash&logoColor=white
 [unsplash-url]: https://unsplash.com/
-[google_maps.com]: https://img.shields.io/badge/Unsplash-#4285F4?style=for-the-badge&logo=googlemaps&logoColor=white
+[google_maps.com]: https://img.shields.io/badge/Google_Maps-#4285F4?style=for-the-badge&logo=googlemaps&logoColor=white
 [google_maps-url]: https://unsplash.com/
