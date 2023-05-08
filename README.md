@@ -12,15 +12,11 @@
 
 Carnet De Voyage est une application mobile inspirée des carnets de voyage papier permettant de planifier son voyage et d'y associer des souvenirs.
 
-<div style="display:flex; flex-direction:space-around;">
-  <img src="./assets/screenshot-1.png" width="167" height="362">
-  <img src="./assets/screenshot-2.png" width="167" height="362">
-  <img src="./assets/screenshot-3.png" width="167" height="362">
+<div align="center">
+  <img src="./assets/screenshot-1.png" alt="Screenshot" width="234" height="506.4">
+  <img src="./assets/screenshot-2.png" alt="Screeshot" width="234" height="506.4">
+  <img src="./assets/screenshot-3.png" alt="Screenshot" width="234" height="506.4">
 </div>
-
-![Carnet De Voyage screenshot 1][carnet_de_voyage-screenshot-1]
-![Carnet De Voyage screenshot 2][carnet_de_voyage-screenshot-2]
-![Carnet De Voyage screenshot 2][carnet_de_voyage-screenshot-3]
 
 <!-- FONCTIONNALITÉS -->
 
