@@ -16,6 +16,7 @@ import { db } from "../firebase/config";
 import { digitalDate } from "../utils/dateFormating";
 import { refreshTravels } from "../utils/signals";
 import { LinearGradient } from "expo-linear-gradient";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 function Home({ navigation, route }) {
   const [travels, setTravels] = useState(null);
@@ -25,10 +26,13 @@ function Home({ navigation, route }) {
     if (!travels) {
       getTravels();
     }
+
     const showTravelsList = refreshTravels.add(refreshTravelsList);
     return () => {
       refreshTravels.detach(showTravelsList);
     };
+
+
   }, []);
 
   const getTravels = async () => {
@@ -36,6 +40,7 @@ function Home({ navigation, route }) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
+      storeData(docSnap.data().travels);
       setTravels(docSnap.data().travels);
     }
   };
@@ -44,6 +49,15 @@ function Home({ navigation, route }) {
     setTravels(null);
     getTravels();
   };
+
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+      await AsyncStorage.setItem('@Travels', jsonValue)
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>

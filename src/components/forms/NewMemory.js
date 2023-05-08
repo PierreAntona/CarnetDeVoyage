@@ -9,12 +9,34 @@ import {
   View,
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import { db } from "../../firebase/config";
+import { doc, setDoc } from "firebase/firestore";
+import { refreshMemories } from "../../utils/signals";
 
-function NewMemory({ user, setIsOpen }) {
+function NewMemory({ user, destination, setIsOpen }) {
   const [error, setError] = useState(null);
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [images, setImages] = useState([]);
+
+  const addMemories = async () => {
+    const docRef = doc(db, user, destination);
+
+    await setDoc(doc(docRef, "memories", `${category}`), {
+      description: description,
+      images: images,
+    })
+      .then(() => {
+        setIsOpen(false);
+        refreshMemories.dispatch();
+        setImages([]);
+        setCategory("");
+        setDescription("");
+      })
+      .catch((e) => {
+        setError(e.message);
+      });
+  };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -25,7 +47,7 @@ function NewMemory({ user, setIsOpen }) {
     if (!result.canceled) {
       setImages([
         ...images,
-        { id: result.assets[0].assetId, uri: result.assets[0].uri },
+        result.assets[0].uri,
       ]);
     }
   };
@@ -36,21 +58,21 @@ function NewMemory({ user, setIsOpen }) {
         style={styles.input}
         value={category}
         placeholder="Catégorie"
-        onChangeText={""}
+        onChangeText={(cat) => setCategory(cat)}
       />
       <TextInput
         style={styles.input}
         value={description}
         placeholder="Description"
-        onChangeText={""}
+        onChangeText={(desc) => setDescription(desc)}
       />
       <View style={styles.import}>
         <View style={styles.picContainer}>
           {images.map((image) => (
             <Image
               style={{ height: 104, width: 200 / images.length }}
-              key={image.id}
-              source={{ uri: image.uri }}
+              key={image.index}
+              source={{ uri: image }}
             />
           ))}
         </View>
@@ -72,7 +94,7 @@ function NewMemory({ user, setIsOpen }) {
         </View>
       </View>
       {error && <Text style={styles.error}>{error}</Text>}
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={() => addMemories()}>
         <Text style={styles.buttonText}>Ajouter</Text>
         <Text style={styles.arrow}>→</Text>
       </TouchableOpacity>

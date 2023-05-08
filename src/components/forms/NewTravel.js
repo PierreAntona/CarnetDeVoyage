@@ -59,6 +59,12 @@ function NewTravel({ user, setIsOpen }) {
         })
           .then(() => {
             setIsOpen(false);
+            setDestination({
+              place_id: "",
+              name: "",
+            })
+            setStartDate(new Date());
+            setEndDate(new Date());
             refreshTravels.dispatch();
           })
           .catch((e) => {
@@ -159,7 +165,7 @@ function NewTravel({ user, setIsOpen }) {
             color: "#000",
             fontSize: 18,
             fontFamily: "NotoSans-Light",
-            
+
           },
         }}
       />
