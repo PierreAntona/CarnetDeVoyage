@@ -15,7 +15,7 @@ Carnet De Voyage est une application mobile qui a été conçue pour aider les u
 
 <br />
 <div align="center">
-  <img src="./assets/screenshot-1.png" alt="Screenshot" width="274" height="506.4" style="padding-right:40px">
+  <img src="./assets/screenshot-1.png" alt="Screenshot" width="234" height="506.4">
   <img src="./assets/screenshot-2.png" alt="Screeshot" width="234" height="506.4">
   <!-- <img src="./assets/screenshot-3.png" alt="Screenshot" width="234" height="506.4"> -->
 </div>
@@ -43,6 +43,7 @@ Ce qui rend vraiment Carnet De Voyage unique, c'est sa fonctionnalité de souven
   - Notes
   - Statistiques
 
+
 <!-- CHOIX TECHNIQUES -->
 
 ## Choix techniques
@@ -62,6 +63,7 @@ J'ai également utilisé Expo pour rendre le processus de développement de l'ap
 
 En somme, j'ai choisi d'utiliser ces technologies pour Carnet De Voyage car ce sont des technologies modernes et performantes qui m'ont permis de parvenir à mon but.
 
+
 <!-- CIBLE -->
 
 ## Cible
@@ -72,6 +74,7 @@ Les voyageurs ont des besoins spécifiques en matière de planification de voyag
 
 L'application s'adresse donc aux voyageurs passionnés qui cherchent à maximiser leur expérience de voyage et à garder des souvenirs inoubliables de leurs aventures.
 
+
 <!-- DIFFICULTÉS RENCONTRÉES -->
 
 ## Difficultés rencontrées
@@ -81,6 +84,7 @@ Dans un premier temps, la création des maquettes à représenter un vrai défi 
 Ensuite, l'utilisation de React Native a également apporté son lot de difficultés notamment au niveau de la gestion d'erreur et de la stylisation de l'application, car celle-ci est différente de la stylisation pour le web.
 
 Enfin, Firebase a été globalement intuitif et facile à utiliser pour le stockage et la gestion des données de l'application. Cependant, j'ai quand même dû réfléchir à l'architecture des documents et résoudre quelques problèmes de type, notamment lors de la modification de données existantes.
+
 
 <!-- LA SUITE -->
 
