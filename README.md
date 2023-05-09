@@ -15,15 +15,17 @@ Carnet De Voyage est une application mobile qui a été conçue pour aider les u
 
 <br />
 <div align="center">
-  <img src="./assets/screenshot-1.png" alt="Screenshot" width="234" height="506.4">
+  <img src="./assets/screenshot-1.png" alt="Screenshot" width="274" height="506.4" style="padding-right:40px">
   <img src="./assets/screenshot-2.png" alt="Screeshot" width="234" height="506.4">
-  <img src="./assets/screenshot-3.png" alt="Screenshot" width="234" height="506.4">
+  <!-- <img src="./assets/screenshot-3.png" alt="Screenshot" width="234" height="506.4"> -->
 </div>
 <br />
 
 <!-- FONCTIONNALITÉS -->
 
 ## Fonctionnalités
+
+Les utilisateurs peuvent facilement créer des itinéraires personnalisés, ajouter des activités et des points d'intérêt. L'application permet également de garder une trace de toutes les dépenses liées au voyage et des transports à prendre même sans connexion.
 
 - Planification
 
@@ -33,15 +35,13 @@ Carnet De Voyage est une application mobile qui a été conçue pour aider les u
   - Choses à emporter
   - Dépenses effectuées
 
-Avec Carnet De Voyage, les utilisateurs peuvent facilement créer des itinéraires personnalisés, ajouter des activités et des points d'intérêt. L'application permet également de garder une trace de toutes les dépenses liées au voyage et des transports à prendre même sans connexion.
+Ce qui rend vraiment Carnet De Voyage unique, c'est sa fonctionnalité de souvenir. Les utilisateurs peuvent associer directement à leur itinéraire des images et y ajouter une description. Cela leur permet de revivre leurs souvenirs de voyage à tout moment, même après leur retour à la maison.
 
 - Souvenirs
 
   - Photographies
   - Notes
   - Statistiques
-
-Ce qui rend vraiment Carnet De Voyage unique, c'est sa fonctionnalité de souvenir. Les utilisateurs peuvent associer directement à leur itinéraire des images et y ajouter une description. Cela leur permet de revivre leurs souvenirs de voyage à tout moment, même après leur retour à la maison.
 
 <!-- CHOIX TECHNIQUES -->
 
@@ -70,7 +70,26 @@ Carnet De Voyage est une application mobile conçue pour les voyageurs passionn�
 
 Les voyageurs ont des besoins spécifiques en matière de planification de voyage, de navigation, d'hébergement, de restauration, d'activités touristiques et de documentation de leurs voyages. L'application vise à répondre à ces besoins en offrant une plateforme moderne et pratique pour planifier, organiser et documenter les voyages.
 
-Carnet De Voyage s'adresse aux voyageurs passionnés qui cherchent à maximiser leur expérience de voyage et à garder des souvenirs inoubliables de leurs aventures.
+L'application s'adresse donc aux voyageurs passionnés qui cherchent à maximiser leur expérience de voyage et à garder des souvenirs inoubliables de leurs aventures.
+
+<!-- DIFFICULTÉS RENCONTRÉES -->
+
+## Difficultés rencontrées
+
+Dans un premier temps, la création des maquettes à représenter un vrai défi pour moi, n'étant pas habitué à travailler sur le design d'interfaces utilisateur. Cela a nécessité une certaine recherche et réflexion pour trouver les bonnes couleurs, typographies et mise en page pour l'application.
+
+Ensuite, l'utilisation de React Native a également apporté son lot de difficultés notamment au niveau de la gestion d'erreur et de la stylisation de l'application, car celle-ci est différente de la stylisation pour le web.
+
+Enfin, Firebase a été globalement intuitif et facile à utiliser pour le stockage et la gestion des données de l'application. Cependant, j'ai quand même dû réfléchir à l'architecture des documents et résoudre quelques problèmes de type, notamment lors de la modification de données existantes.
+
+<!-- LA SUITE -->
+
+## La suite
+
+Maintenant que l'application est en phase de finalisation, je souhaite continuer de l'optimiser. En particulier, je pense qu'il y a des améliorations à apporter au niveau des API utilisées pour améliorer les performances et l'expérience utilisateur de l'application.
+
+Ensuite, une fois que ces améliorations auront été apportées, je prévois de déployer l'application sur l'App Store. Le déploiement sur l'App Store nécessitera la création d'un compte développeur Apple, ainsi que la mise en place de tests et de procédures de vérification pour garantir la qualité et la fiabilité de l'application.
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
