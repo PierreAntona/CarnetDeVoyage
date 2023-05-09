@@ -11,7 +11,7 @@
 
 ## À propos du projet
 
-Carnet De Voyage est une application mobile qui a été conçue pour aider les utilisateurs à planifier leur voyage de manière simple et efficace. Inspirée des carnets de voyage papier, l'application offre un moyen pratique et moderne de planifier des voyages, en permettant aux utilisateurs d'y associer des souvenirs et des informations précieuses.
+Carnet De Voyage est une application mobile qui a été conçue pour aider les utilisateurs à planifier leur voyage de manière simple et efficace. Inspirée des carnets de voyage papier, l'application offre un moyen pratique et moderne de planifier des voyages en permettant aux utilisateurs d'y associer des souvenirs et des informations précieuses.
 
 <br />
 <div align="center">
@@ -25,7 +25,7 @@ Carnet De Voyage est une application mobile qui a été conçue pour aider les u
 
 ## Fonctionnalités
 
-Les utilisateurs peuvent facilement créer des itinéraires personnalisés, ajouter des activités et des points d'intérêt. L'application permet également de garder une trace de toutes les dépenses liées au voyage et des transports à prendre même sans connexion.
+Les utilisateurs peuvent facilement créer des itinéraires personnalisés, ajouter des activités et des points d'intérêt. L'application permet également de garder une trace de toutes les dépenses liées au voyage et des transports à prendre, même hors connexion.
 
 - Planification
 
@@ -35,7 +35,7 @@ Les utilisateurs peuvent facilement créer des itinéraires personnalisés, ajou
   - Choses à emporter
   - Dépenses effectuées
 
-Ce qui rend vraiment Carnet De Voyage unique, c'est sa fonctionnalité de souvenir. Les utilisateurs peuvent associer directement à leur itinéraire des images et y ajouter une description. Cela leur permet de revivre leurs souvenirs de voyage à tout moment, même après leur retour à la maison.
+Ce qui rend vraiment Carnet De Voyage unique, c'est sa fonctionnalité de souvenir. Les utilisateurs peuvent associer directement à leur voyage des images et du texte. Cela leur permet de revivre leurs souvenirs de voyage à tout moment, même après leur retour à la maison.
 
 - Souvenirs
 
@@ -79,9 +79,9 @@ L'application s'adresse donc aux voyageurs passionnés qui cherchent à maximise
 
 ## Difficultés rencontrées
 
-Dans un premier temps, la création des maquettes à représenter un vrai défi pour moi, n'étant pas habitué à travailler sur le design d'interfaces utilisateur. Cela a nécessité une certaine recherche et réflexion pour trouver les bonnes couleurs, typographies et mise en page pour l'application.
+Dans un premier temps, la création des maquettes a représenté un vrai défi pour moi, n'étant pas habitué à travailler sur le design d'interfaces utilisateur. Cela a nécessité une certaine recherche et réflexion pour trouver les bonnes couleurs, typographies et mise en page pour l'application.
 
-Ensuite, l'utilisation de React Native a également apporté son lot de difficultés notamment au niveau de la gestion d'erreur et de la stylisation de l'application, car celle-ci est différente de la stylisation pour le web.
+Ensuite, l'utilisation de React Native a également apporté son lot de difficultés notamment au niveau de la gestion d'erreur et de la stylisation de l'application, celle-ci étant assez différente de la stylisation pour le web.
 
 Enfin, Firebase a été globalement intuitif et facile à utiliser pour le stockage et la gestion des données de l'application. Cependant, j'ai quand même dû réfléchir à l'architecture des documents et résoudre quelques problèmes de type, notamment lors de la modification de données existantes.
 
@@ -90,9 +90,9 @@ Enfin, Firebase a été globalement intuitif et facile à utiliser pour le stock
 
 ## La suite
 
-Maintenant que l'application est en phase de finalisation, je souhaite continuer de l'optimiser. En particulier, je pense qu'il y a des améliorations à apporter au niveau des API utilisées pour améliorer les performances et l'expérience utilisateur de l'application.
+Maintenant que l'application est en phase de finalisation, je souhaite continuer de l'optimiser. Je pense qu'il y a notamment des améliorations à apporter au niveau des API utilisées afin d'améliorer les performances et éviter les surcoûts.
 
-Ensuite, une fois que ces améliorations auront été apportées, je prévois de déployer l'application sur l'App Store. Le déploiement sur l'App Store nécessitera la création d'un compte développeur Apple, ainsi que la mise en place de tests et de procédures de vérification pour garantir la qualité et la fiabilité de l'application.
+Une fois que ces améliorations auront été apportées, je prévois de déployer l'application sur l'App Store. Le déploiement sur l'App Store nécessitera la création d'un compte développeur Apple, ainsi que la mise en place de tests et de procédures de vérification pour garantir la qualité et la fiabilité de l'application.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
