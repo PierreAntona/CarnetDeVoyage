@@ -9,7 +9,7 @@ import {
   Text,
 } from "react-native";
 
-const DEFAULT_HEIGHT = 500;
+const DEFAULT_HEIGHT = 675;
 
 function useAnimatedBottom(isOpen, height = DEFAULT_HEIGHT) {
   const AnimatedValue = useRef(new Animated.Value(0));
@@ -60,7 +60,6 @@ function BottomForm({
           isOpen ? { display: "flex" } : { display: "none" },
         ]}
       >
-        <View />
       </Pressable>
       <Animated.View style={[styles.container, { height, bottom }]}>
         <View style={styles.header}>
@@ -89,7 +88,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    fontFamily: 'Playfair-Regular'
-    ,marginBottom: 30
+    fontFamily: 'Playfair-Regular',
+    marginBottom: 30
   }
 });

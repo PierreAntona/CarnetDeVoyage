@@ -15,9 +15,9 @@ Carnet De Voyage est une application mobile qui a été conçue pour aider les u
 
 <br />
 <div align="center">
-  <img src="./assets/screenshot-1.png" alt="Screenshot" width="274" height="506.4" style="padding-right:40px">
+  <img src="./assets/screenshot-1.png" alt="Screenshot" width="274" height="506.4">
   <img src="./assets/screenshot-2.png" alt="Screeshot" width="234" height="506.4">
-  <!-- <img src="./assets/screenshot-3.png" alt="Screenshot" width="234" height="506.4"> -->
+  <img src="./assets/screenshot-3.png" alt="Screenshot" width="234" height="506.4">
 </div>
 <br />
 
@@ -50,7 +50,6 @@ Ce qui rend vraiment Carnet De Voyage unique, c'est sa fonctionnalité de souven
 - [![React Native][react_native.com]][react_native-url]
 - [![Firebase][firebase.com]][firebase-url]
 - [![Expo][expo.com]][expo-url]
-- [![Axios][axios.com]][axios-url]
 - [![Google Maps][google_maps.com]][google_maps-url]
 - [![Unsplash][unsplash.com]][unsplash-url]
 

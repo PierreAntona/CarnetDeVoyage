@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Image,
   ScrollView,
@@ -59,19 +59,21 @@ function NewMemory({ user, destination, setIsOpen }) {
         value={category}
         placeholder="Catégorie"
         onChangeText={(cat) => setCategory(cat)}
+        placeholderTextColor={"rgba(0, 0, 0, 0.3)"}
       />
       <TextInput
         style={styles.input}
         value={description}
         placeholder="Description"
         onChangeText={(desc) => setDescription(desc)}
+        placeholderTextColor={"rgba(0, 0, 0, 0.3)"}
       />
       <View style={styles.import}>
         <View style={styles.picContainer}>
-          {images.map((image) => (
+          {images.map((image, index) => (
             <Image
               style={{ height: 104, width: 200 / images.length }}
-              key={image.index}
+              key={index}
               source={{ uri: image }}
             />
           ))}

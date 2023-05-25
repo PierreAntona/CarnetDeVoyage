@@ -27,6 +27,11 @@ function SignUp({ navigation }) {
         .then(() => {
           setDoc(doc(db, adress, "user"), { name: username, travels: [] });
           navigation.navigate("Home", adress);
+          setError("");
+          setUsername("");
+          setAdress("");
+          setPassword("");
+          setConfirmPassword("")
         })
         .catch((e) => {
           if (e.code == "auth/invalid-email") {

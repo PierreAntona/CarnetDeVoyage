@@ -18,7 +18,7 @@ const digitalDate = (myDate) => {
 };
 
 const textDate = (myDate) => {
-  const days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Samedi"];
+  const days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
   const months = [
     "janvier",
     "février",
@@ -33,13 +33,42 @@ const textDate = (myDate) => {
     "novembre",
     "décembre",
   ];
-  const date = new Date(myDate.seconds * 1000);
+  const date = new Date(null);
+  date.setTime(myDate.seconds * 1000)
 
   let w = days[date.getDay()];
-  let d = date.getDate();
+  let d = date.getUTCDate();
   let m = months[date.getMonth()];
 
   return `${w} ${d} ${m}`;
 };
 
-export { digitalDate, textDate };
+const timeFromDate = (myDate) => {
+  let h =
+    myDate.getHours().toString().length === 1
+      ? `0${myDate.getHours()}`
+      : myDate.getHours();
+  let m =
+    myDate.getMinutes().toString().length === 1
+      ? `0${myDate.getMinutes()}`
+      : myDate.getMinutes();
+
+  return `${h}:${m}`
+}
+
+const timeFromTimestamp = (myDate) => {
+  const date = new Date(myDate.seconds * 1000);
+
+  let h =
+    date.getHours().toString().length === 1
+      ? `0${date.getHours()}`
+      : date.getHours();
+  let m =
+    date.getMinutes().toString().length === 1
+      ? `0${date.getMinutes()}`
+      : date.getMinutes();
+
+  return `${h}:${m}`
+}
+
+export { digitalDate, textDate, timeFromDate, timeFromTimestamp };

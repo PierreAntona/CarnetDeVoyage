@@ -7,10 +7,10 @@ import {
   View,
 } from "react-native";
 import { useEffect, useState } from "react";
-import BottomForm from "../components/BottomForm";
+import BottomForm from "../components/animated/BottomForm";
 import { LinearGradient } from "expo-linear-gradient";
 import NewMemory from "../components/forms/NewMemory";
-import MemoryCard from "../components/MemoryCard.js";
+import MemoryCard from "../components/cards/MemoryCard.js";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { refreshMemories } from "../utils/signals";
@@ -21,6 +21,7 @@ function Memories({ navigation, route }) {
   const [focusedMemoryCard, setFocusedMemoryCard] = useState(null);
 
   useEffect(() => {
+
     if (!memories.length > 0) {
       getMemories();
     }
@@ -61,10 +62,6 @@ function Memories({ navigation, route }) {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Souvenirs</Text>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Partager</Text>
-          <Text style={styles.arrow}>→</Text>
-        </TouchableOpacity>
       </View>
 
       <FlatList

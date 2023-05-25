@@ -9,30 +9,38 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import BottomForm from "../components/BottomForm";
+import BottomForm from "../components/animated/BottomForm";
 import NewTravel from "../components/forms/NewTravel";
-import TravelCard from "../components/TravelCard";
+import TravelCard from "../components/cards/TravelCard";
 import { db } from "../firebase/config";
 import { digitalDate } from "../utils/dateFormating";
 import { refreshTravels } from "../utils/signals";
 import { LinearGradient } from "expo-linear-gradient";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import Panel from "../components/animated/Panel";
+import Account from "../components/Account";
+import { checkNetworkStatus } from "../utils/network";
+import { getValueFor } from "../utils/localStorage";
 
 function Home({ navigation, route }) {
-  const [travels, setTravels] = useState(null);
+  const [travels, setTravels] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [username, setUsername] = useState("");
+  const [panelIsOpen, setPanelIsOpen] = useState(false);
+  const [network, setNetwork] = useState(true);
 
   useEffect(() => {
-    if (!travels) {
+    getValueFor("_adress", route.params);
+
+    if (!travels.length > 0) {
       getTravels();
     }
+
+    // checkNetworkStatus();
 
     const showTravelsList = refreshTravels.add(refreshTravelsList);
     return () => {
       refreshTravels.detach(showTravelsList);
     };
-
-
   }, []);
 
   const getTravels = async () => {
@@ -40,37 +48,43 @@ function Home({ navigation, route }) {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      storeData(docSnap.data().travels);
       setTravels(docSnap.data().travels);
+      setUsername(docSnap.data().name)
     }
   };
 
   const refreshTravelsList = () => {
-    setTravels(null);
+    setTravels([]);
     getTravels();
   };
-
-  const storeData = async (value) => {
-    try {
-      const jsonValue = JSON.stringify(value)
-      await AsyncStorage.setItem('@Travels', jsonValue)
-    } catch (e) {
-      console.log(e);
-    }
-  }
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
       <View style={styles.header}>
         <Text style={styles.title}>Mes voyages</Text>
+        <TouchableOpacity style={styles.button} onPress={() => setPanelIsOpen(true)}>
+          <Text style={styles.buttonText}>
+            Mon compte
+          </Text>
+          <Text style={styles.arrow}>→</Text>
+        </TouchableOpacity>
+        {!network && <Text style={styles.offline}>Hors ligne</Text>}
       </View>
+
+      <Panel
+        panelIsOpen={panelIsOpen}
+        setPanelIsOpen={setPanelIsOpen}
+        children={<Account username={username} adress={route.params} number={travels.length} navigation={navigation} />}
+        title={"Mon compte"}
+      />
 
       <FlatList
         style={styles.list}
         data={travels}
         renderItem={({ item }) => (
           <TravelCard
+            network={network}
             navigation={navigation}
             user={route.params}
             destination={item}
@@ -88,10 +102,13 @@ function Home({ navigation, route }) {
         end={{ x: 0.5, y: 0 }}
       />
 
-      <TouchableOpacity style={styles.add} onPress={() => setIsOpen(true)}>
-        <Text style={styles.addText}>Nouveau voyage</Text>
-        <Text style={styles.arrow}>↑</Text>
-      </TouchableOpacity>
+
+      {network &&
+        <TouchableOpacity style={styles.add} onPress={() => setIsOpen(true)}>
+          <Text style={styles.addText}>Nouveau voyage</Text>
+          <Text style={styles.arrow}>↑</Text>
+        </TouchableOpacity>
+      }
 
       <BottomForm
         isOpen={isOpen}
@@ -127,9 +144,27 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
+  offline: {
+    textAlign: "center",
+    marginTop: 20,
+    color: "#000",
+    fontSize: 20,
+    backgroundColor: "#E5CA93",
+    fontFamily: "Playfair-Regular",
+  },
   addText: {
     fontSize: 20,
     color: "#E5CA93",
+    fontFamily: "Playfair-Regular",
+  },
+  button: {
+    alignSelf: "flex-end",
+    flexDirection: "row",
+    justifyContent: "center",
+  },
+  buttonText: {
+    color: "#E5CA93",
+    fontSize: 20,
     fontFamily: "Playfair-Regular",
   },
   arrow: {

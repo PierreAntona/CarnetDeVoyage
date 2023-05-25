@@ -1,6 +1,7 @@
 import { getAuth, signInWithEmailAndPassword } from "@firebase/auth";
 import { app } from "../../firebase/config";
 import React, { useState } from "react";
+import * as SecureStore from 'expo-secure-store';
 import {
   StyleSheet,
   Text,
@@ -16,10 +17,18 @@ function SignIn({ navigation }) {
 
   const auth = getAuth(app);
 
+  async function save(key, value) {
+    await SecureStore.setItemAsync(key, value);
+  }
+
   const login = () => {
     signInWithEmailAndPassword(auth, adress, password)
       .then(() => {
+        save("_adress", adress);
         navigation.navigate("Home", adress);
+        setError("");
+        setAdress("");
+        setPassword("");
       })
       .catch((e) => {
         setError("Adresse ou mot de passe incorrect");

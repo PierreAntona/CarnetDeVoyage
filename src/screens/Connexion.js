@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -10,15 +10,27 @@ import {
 
 import SignIn from "../components/connexion/SignIn";
 import SignUp from "../components/connexion/SignUp";
+import * as SecureStore from 'expo-secure-store';
 
 function Connexion({ navigation }) {
   const [alreadyHaveAccount, setAlreadyHaveAccount] = useState(true);
+
+  useEffect(() => {
+    getValueFor("_adress");
+  }, [])
+
+  async function getValueFor(key) {
+    let result = await SecureStore.getItemAsync(key);
+    if (result) {
+      navigation.navigate("Home", result)
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="light" />
       <View style={styles.header}>
-        <Text style={styles.title}>Cahier</Text>
+        <Text style={styles.title}>Carnet</Text>
         <Text style={styles.title}>De Voyage</Text>
       </View>
       {alreadyHaveAccount ? (
@@ -51,7 +63,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "space-between",
-    backgroundColor: "#1E1E1E",
+    backgroundColor: "#100D05",
   },
   header: {
     paddingHorizontal: 18,

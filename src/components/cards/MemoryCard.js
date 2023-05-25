@@ -10,13 +10,12 @@ import {
   Image,
   StyleSheet,
   Text,
-  Touchable,
   TouchableOpacity,
   View,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { db } from "../firebase/config";
-import { refreshMemories } from "../utils/signals";
+import { db } from "../../firebase/config";
+import { refreshMemories } from "../../utils/signals";
 import * as ImagePicker from "expo-image-picker";
 import { useEffect, useState } from "react";
 
@@ -80,17 +79,15 @@ const MemoryCard = ({
         />
       </View>
 
-      {photos && (
-        <FlatList
-          style={[styles.list, { top: -8 }]}
-          horizontal
-          data={photos}
-          renderItem={(image) => (
-            <Image source={{ uri: image.item }} style={styles.defaultImage} />
-          )}
-          keyExtractor={(image) => image.item}
-        />
-      )}
+      <FlatList
+        style={[styles.list, { top: -8 }]}
+        horizontal
+        data={photos}
+        renderItem={(image) => (
+          <Image source={{ uri: image.item }} style={styles.defaultImage} />
+        )}
+        keyExtractor={(image) => `default${Math.random() * 100}`}
+      />
     </TouchableOpacity>
   ) : (
     <View style={styles.container}>
@@ -107,36 +104,33 @@ const MemoryCard = ({
         <Text style={styles.description}>{description}</Text>
       </TouchableOpacity>
 
-      {photos && (
-        <>
-          <FlatList
-            style={[styles.list, { top: 0 }]}
-            horizontal
-            data={photos}
-            renderItem={(image) => (
-              <>
-                <TouchableOpacity
-                  style={styles.deleteImage}
-                  onPress={() => deleteMemory(image.item)}
-                >
-                  <Text style={styles.deleteImageCross}>-</Text>
-                </TouchableOpacity>
-                <Image
-                  source={{ uri: image.item }}
-                  style={styles.focusedImage}
-                />
-              </>
-            )}
-            keyExtractor={(image) => image.item}
-          />
-          <TouchableOpacity
-            style={styles.addMemory}
-            onPress={() => pickImage()}
-          >
-            <Text style={styles.addMemoryText}>+ Ajouter une image</Text>
-          </TouchableOpacity>
-        </>
-      )}
+      <FlatList
+        style={[styles.list, { top: 0 }]}
+        horizontal
+        data={photos}
+        renderItem={(image) => (
+          <>
+            <TouchableOpacity
+              style={styles.deleteImage}
+              onPress={() => deleteMemory(image.item)}
+            >
+              <Text style={styles.deleteImageCross}>-</Text>
+            </TouchableOpacity>
+            <Image
+              source={{ uri: image.item }}
+              style={styles.focusedImage}
+            />
+          </>
+        )}
+        keyExtractor={() => `focused${Math.random() * 100}`}
+      />
+      <TouchableOpacity
+        style={styles.addMemory}
+        onPress={() => pickImage()}
+      >
+        <Text style={styles.addMemoryText}>+ Ajouter une image</Text>
+      </TouchableOpacity>
+
     </View>
   );
 };

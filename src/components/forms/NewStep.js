@@ -3,17 +3,18 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
-import SelectDropdown from "react-native-select-dropdown";
+import FlightForm from "./stepsForm/flight";
+import HousingForm from "./stepsForm/housing";
+import RestaurantForm from "./stepsForm/restaurant";
+import VisitForm from "./stepsForm/visit";
+import OtherForm from "./stepsForm/other";
+import TransportForm from "./stepsForm/transport";
 
-function NewStep({ user, setIsOpen }) {
-  const [stepType, setStepType] = useState();
-  const [departureAirport, setDepartureAirport] = useState("");
-  const [arrivalAirport, setArrivalAirport] = useState("");
-  const [error, setError] = useState(null);
+function NewStep({ user, destination, setIsOpen, startDate }) {
+  const [stepType, setStepType] = useState(null);
 
   const types = [
     "Vol",
@@ -21,82 +22,35 @@ function NewStep({ user, setIsOpen }) {
     "Transport",
     "Restaurant",
     "Visite",
-    "Activité",
+    "Autre",
   ];
 
-  const FlightForm = () => {
-    return (
-      <>
-        <TextInput
-          style={styles.input}
-          value={departureAirport}
-          placeholder="Aéroport de départ"
-          onChangeText={setDepartureAirport}
-        />
-        <TextInput
-          style={styles.input}
-          value={""}
-          placeholder="Aéroport d'arrivé"
-          onChangeText={setArrivalAirport}
-        />
-        <TextInput
-          style={styles.input}
-          value={arrivalAirport}
-          placeholder="Heure de départ"
-          onChangeText={""}
-        />
-        <TextInput
-          style={styles.input}
-          value={""}
-          placeholder="Heure d'arrivé"
-          onChangeText={""}
-        />
-      </>
-    );
-  };
   return (
     <ScrollView style={styles.container}>
-      <SelectDropdown
-        data={types}
-        defaultButtonText={"Type d'étape"}
-        buttonStyle={[styles.input, { backgroundColor: "transparent" }]}
-        dropdownOverlayColor="transparent"
-        buttonTextStyle={{
-          color: "#000",
-          fontSize: 18,
-          textAlign: "left",
-          marginLeft: -5,
-          fontFamily: "NotoSans-Light",
-        }}
-        dropdownStyle={{
-          backgroundColor: "#100D05",
-          borderBottomLeftRadius: 10,
-          borderBottomRightRadius: 10
-        }}
-        rowStyle={{
-          borderBottomColor: "#E5CA93",
-        }}
-        rowTextStyle={{
-          textAlign: "left",
-          fontFamily: "NotoSans-Light",
-          color: "#E5CA93",
-        }}
-        onSelect={(selectedItem, index) => {
-          setStepType(index);
-        }}
-        buttonTextAfterSelection={(selectedItem, index) => {
-          return selectedItem;
-        }}
-        rowTextForSelection={(item, index) => {
-          return item;
-        }}
-      />
-      {stepType === 0 && <FlightForm />}
-      {error && <Text style={styles.error}>{error}</Text>}
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Ajouter</Text>
-        <Text style={styles.arrow}>→</Text>
-      </TouchableOpacity>
+      <View style={styles.types}>
+        {types.map((type, index) => (
+          <TouchableOpacity
+            key={index}
+            style={[styles.type, stepType === index && { backgroundColor: "#000" }]}
+            onPress={() => setStepType(index)}
+          >
+            <Text style={[styles.typeText, stepType === index && { color: "#E5CA93" }]}>{type}</Text>
+          </TouchableOpacity>
+        ))}
+      </View>
+
+      {stepType === 0 && <FlightForm startDate={startDate} user={user} destination={destination} setIsOpen={setIsOpen} />}
+
+      {stepType === 1 && <HousingForm startDate={startDate} user={user} destination={destination} setIsOpen={setIsOpen} />}
+
+      {stepType === 2 && <TransportForm startDate={startDate} user={user} destination={destination} setIsOpen={setIsOpen} />}
+
+      {stepType === 3 && <RestaurantForm startDate={startDate} user={user} destination={destination} setIsOpen={setIsOpen} />}
+
+      {stepType === 4 && <VisitForm startDate={startDate} user={user} destination={destination} setIsOpen={setIsOpen} />}
+
+      {stepType === 5 && <OtherForm startDate={startDate} user={user} destination={destination} setIsOpen={setIsOpen} />}
+
     </ScrollView>
   );
 }
@@ -108,32 +62,24 @@ const styles = StyleSheet.create({
     flex: 1,
     marginBottom: 40
   },
-  input: {
-    borderBottomWidth: 1,
-    fontSize: 18,
-    marginBottom: 18,
-    fontFamily: "NotoSans-Light",
-    width: "100%",
-    marginBottom: 50,
-    height: 50,
-  },
-  error: {
-    color: "red",
-    textAlign: "center",
-  },
-  button: {
-    alignSelf: "flex-end",
-    marginTop: 20,
+  types: {
     flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    flexWrap: "wrap",
+    marginBottom: 12
+  },
+  type: {
+    width: "30%",
+    paddingVertical: 6,
+    borderWidth: 1,
+    borderColor: "#000",
     justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 10
   },
-  buttonText: {
-    fontSize: 20,
-    fontFamily: "Playfair-Regular",
-  },
-  arrow: {
-    fontSize: 20,
+  typeText: {
     fontFamily: "NotoSans-Light",
-    marginLeft: 10,
-  },
+    fontSize: 16
+  }
 });

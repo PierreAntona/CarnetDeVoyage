@@ -56,6 +56,7 @@ function NewTravel({ user, setIsOpen }) {
           destination: destination,
           start: startDate,
           end: endDate,
+          valise: []
         })
           .then(() => {
             setIsOpen(false);
@@ -91,7 +92,7 @@ function NewTravel({ user, setIsOpen }) {
   const setUpTravel = () => {
     axios(configTimezone)
       .then((res) => {
-        setTimezone(parseInt(res.data.result.utc_offset - 60) / 60);
+        setTimezone(parseInt(res.data.result.utc_offset - 120) / 60);
         res.data.result.address_components.forEach((element) => {
           if (element.types[0] === "country") {
             setCountry(element.short_name);
@@ -106,6 +107,9 @@ function NewTravel({ user, setIsOpen }) {
     <ScrollView style={styles.container} keyboardShouldPersistTaps="always">
       <GooglePlacesAutocomplete
         placeholder="Destination"
+        textInputProps={{
+          placeholderTextColor: "#000",
+        }}
         onPress={(data, details = null) => {
           setDestination({
             place_id: data.place_id,
@@ -138,7 +142,7 @@ function NewTravel({ user, setIsOpen }) {
         minLength={3}
         styles={{
           container: {
-            marginBottom: 42
+            marginBottom: 42,
           },
           textInput: {
             borderBottomWidth: 1,
@@ -154,18 +158,16 @@ function NewTravel({ user, setIsOpen }) {
           },
           separator: {
             color: "#000",
-            height: 0
+            height: 0,
           },
           row: {
             backgroundColor: "transparent",
             borderBottomWidth: 0.5,
-            borderBottomColor: "#000"
+            borderBottomColor: "#000",
           },
           description: {
-            color: "#000",
             fontSize: 18,
-            fontFamily: "NotoSans-Light",
-
+            fontFamily: "NotoSans-Light"
           },
         }}
       />
@@ -191,7 +193,7 @@ function NewTravel({ user, setIsOpen }) {
         title="Selectionner une date"
         confirmText="Confirmer"
         cancelText="Annuler"
-        theme="auto"
+        theme="light"
       />
 
       <TextInput
@@ -216,7 +218,7 @@ function NewTravel({ user, setIsOpen }) {
         title="Selectionner une date"
         confirmText="Confirmer"
         cancelText="Annuler"
-        theme="auto"
+        theme="light"
       />
 
       {error && <Text style={styles.error}>{error}</Text>}

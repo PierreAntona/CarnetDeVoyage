@@ -43,16 +43,22 @@ const CardDetails = ({ destination, start, end, navigation, user }) => {
         {start} - {end}
       </Text>
       <View style={cdStyles.details}>
-        <Text style={cdStyles.detailsText}>
-          {destination.timezone > 0 && "+"}
-          {destination.timezone}
-          {destination.timezone > 1 || destination.timezone < -1
-            ? " heures"
-            : " heure"}
-        </Text>
-        <Text style={cdStyles.detailsText}>
-          1 EUR = {exchangeRate} {destination.currency}
-        </Text>
+        {destination.timezone === 0 ?
+          <Text style={cdStyles.detailsText}>Heure de Paris</Text> :
+          <Text style={cdStyles.detailsText}>
+            {destination.timezone > 0 && "+"}
+            {destination.timezone}
+            {destination.timezone > 1 || destination.timezone < -1
+              ? " heures"
+              : " heure"}
+          </Text>
+        }
+        {destination.currency === "EUR" ?
+          <Text style={cdStyles.detailsText}>Euro</Text> :
+          <Text style={cdStyles.detailsText}>
+            1 EUR = {exchangeRate} {destination.currency}
+          </Text>
+        }
       </View>
       <View style={cdStyles.buttons}>
         <TouchableOpacity
@@ -135,7 +141,7 @@ const cdStyles = StyleSheet.create({
   },
 });
 
-function TravelCard({ navigation, user, destination, start, end }) {
+function TravelCard({ navigation, user, destination, start, end, network }) {
   const [destinationNameWidth, setDestinationNameWidth] = useState(0);
   const [isSlide, setIsSlide] = useState(false);
   const [index, setIndex] = useState(1);
@@ -188,41 +194,43 @@ function TravelCard({ navigation, user, destination, start, end }) {
   };
 
   return (
-    <TouchableOpacity onPress={() => (!isSlide ? slideRight() : slideLeft())}>
-      <Animated.View
-        style={[
-          styles.container,
-          {
-            transform: [{ translateX: slideAnim }],
-            zIndex: index,
-          },
-        ]}
-      >
-        <Animated.Text
-          onLayout={(e) => setDestinationNameWidth(e.nativeEvent.layout.width)}
-          numberOfLines={1}
+    <TouchableOpacity onPress={() => (!isSlide && network ? slideRight() : slideLeft())}>
+      {network &&
+        <Animated.View
           style={[
-            styles.destinationName,
+            styles.container,
             {
-              transform: [
-                { translateX: -1 * (destinationNameWidth / 2) },
-                { rotate: "-90deg" },
-                { translateX: destinationNameWidth / 2 },
-              ],
-              opacity: fadeAnim,
+              transform: [{ translateX: slideAnim }],
+              zIndex: index,
             },
           ]}
         >
-          {destination.destination.name}
-        </Animated.Text>
-        <LinearGradient
-          colors={["#100D05", "rgba(16, 13, 5, 0)"]}
-          style={styles.gradient}
-          start={{ x: 0.125, y: 0.5 }}
-          end={{ x: 0.75, y: 0.2 }}
-        />
-        <Image style={styles.image} source={{ uri: destination.photoUrl }} />
-      </Animated.View>
+          <Animated.Text
+            onLayout={(e) => setDestinationNameWidth(e.nativeEvent.layout.width)}
+            numberOfLines={1}
+            style={[
+              styles.destinationName,
+              {
+                transform: [
+                  { translateX: -1 * (destinationNameWidth / 2) },
+                  { rotate: "-90deg" },
+                  { translateX: destinationNameWidth / 2 },
+                ],
+                opacity: fadeAnim,
+              },
+            ]}
+          >
+            {destination.destination.name}
+          </Animated.Text>
+          <LinearGradient
+            colors={["#100D05", "rgba(16, 13, 5, 0)"]}
+            style={styles.gradient}
+            start={{ x: 0.125, y: 0.5 }}
+            end={{ x: 0.75, y: 0.2 }}
+          />
+          <Image style={styles.image} source={{ uri: destination.photoUrl }} />
+        </Animated.View>
+      }
       <CardDetails
         destination={destination}
         start={start}
