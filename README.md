@@ -15,9 +15,9 @@ Carnet De Voyage est une application mobile qui a été conçue pour aider les u
 
 <br />
 <div align="center">
-  <img src="./assets/screenshot-1.png" alt="Screenshot" width="234" height="506.4">
-  <img src="./assets/screenshot-2.png" alt="Screeshot" width="234" height="506.4">
-  <img src="./assets/screenshot-3.png" alt="Screenshot" width="234" height="506.4">
+  <img src="./assets/Screenshot-1.png" alt="Screenshot" width="234" height="506.4">
+  <img src="./assets/Screenshot-2.png" alt="Screeshot" width="234" height="506.4">
+  <img src="./assets/Screenshot-3.png" alt="Screenshot" width="234" height="506.4">
 </div>
 <br />
 

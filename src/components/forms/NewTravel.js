@@ -5,6 +5,7 @@ import axios from "axios";
 import countryToCurrency from "country-to-currency";
 import {
   ScrollView,
+  View,
   StyleSheet,
   Text,
   TextInput,
@@ -104,7 +105,56 @@ function NewTravel({ user, setIsOpen }) {
   };
 
   return (
-    <ScrollView style={styles.container} keyboardShouldPersistTaps="always">
+    <View style={styles.container} keyboardShouldPersistTaps="always">
+      <TextInput
+        style={styles.input}
+        value={digitalDate(startDate)}
+        onFocus={() => setOpenStartDateModal(true)}
+        placeholder="Date de début"
+      />
+      <DatePicker
+        modal
+        open={openStartDateModal}
+        style={styles.datePicker}
+        date={startDate}
+        onConfirm={(startDate) => {
+          setOpenStartDateModal(false);
+          setStartDate(startDate);
+        }}
+        onCancel={() => {
+          setOpenStartDateModal(false);
+        }}
+        mode="date"
+        title="Selectionner une date"
+        confirmText="Confirmer"
+        cancelText="Annuler"
+        theme="light"
+      />
+
+      <TextInput
+        style={styles.input}
+        value={digitalDate(endDate)}
+        onFocus={() => setOpenEndDateModal(true)}
+        placeholder="Date de fint"
+      />
+      <DatePicker
+        modal
+        open={openEndDateModal}
+        style={styles.datePicker}
+        date={endDate}
+        onConfirm={(endDate) => {
+          setOpenEndDateModal(false);
+          setEndDate(endDate);
+        }}
+        onCancel={() => {
+          setOpenEndDateModal(false);
+        }}
+        mode="date"
+        title="Selectionner une date"
+        confirmText="Confirmer"
+        cancelText="Annuler"
+        theme="light"
+      />
       <GooglePlacesAutocomplete
         placeholder="Destination"
         textInputProps={{
@@ -171,62 +221,13 @@ function NewTravel({ user, setIsOpen }) {
           },
         }}
       />
-      <TextInput
-        style={styles.input}
-        value={digitalDate(startDate)}
-        onFocus={() => setOpenStartDateModal(true)}
-        placeholder="Date de début"
-      />
-      <DatePicker
-        modal
-        open={openStartDateModal}
-        style={styles.datePicker}
-        date={startDate}
-        onConfirm={(startDate) => {
-          setOpenStartDateModal(false);
-          setStartDate(startDate);
-        }}
-        onCancel={() => {
-          setOpenStartDateModal(false);
-        }}
-        mode="date"
-        title="Selectionner une date"
-        confirmText="Confirmer"
-        cancelText="Annuler"
-        theme="light"
-      />
-
-      <TextInput
-        style={styles.input}
-        value={digitalDate(endDate)}
-        onFocus={() => setOpenEndDateModal(true)}
-        placeholder="Date de fint"
-      />
-      <DatePicker
-        modal
-        open={openEndDateModal}
-        style={styles.datePicker}
-        date={endDate}
-        onConfirm={(endDate) => {
-          setOpenEndDateModal(false);
-          setEndDate(endDate);
-        }}
-        onCancel={() => {
-          setOpenEndDateModal(false);
-        }}
-        mode="date"
-        title="Selectionner une date"
-        confirmText="Confirmer"
-        cancelText="Annuler"
-        theme="light"
-      />
 
       {error && <Text style={styles.error}>{error}</Text>}
       <TouchableOpacity onPress={() => setUpTravel()} style={styles.button}>
         <Text style={styles.buttonText}>Ajouter</Text>
         <Text style={styles.arrow}>→</Text>
       </TouchableOpacity>
-    </ScrollView>
+    </View>
   );
 }
 

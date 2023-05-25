@@ -15,12 +15,15 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { refreshMemories } from "../utils/signals";
 
+import {LogBox} from 'react-native';
+
 function Memories({ navigation, route }) {
   const [memories, setMemories] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [focusedMemoryCard, setFocusedMemoryCard] = useState(null);
 
   useEffect(() => {
+    LogBox.ignoreAllLogs();
 
     if (!memories.length > 0) {
       getMemories();
