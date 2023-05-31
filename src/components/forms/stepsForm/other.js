@@ -25,17 +25,12 @@ export default function OtherForm({ startDate, user, destination, setIsOpen }) {
                 adress: adress,
                 description: description,
             })
-                .then(() => {
-                    setIsOpen(false);
-                    refreshPlanning.dispatch();
-                    setDate(startDate ? new Date(startDate.seconds * 1000) : new Date());
-                    setAdress("");
-                    setName("");
-                    setDescription("");
-                })
-                .catch((e) => {
-                    setError(e.message);
-                });
+            setIsOpen(false);
+            refreshPlanning.dispatch();
+            setDate(startDate ? new Date(startDate.seconds * 1000) : new Date());
+            setAdress("");
+            setName("");
+            setDescription("");
         } else {
             setError("Veuillez saisir un nom d'étape")
         }

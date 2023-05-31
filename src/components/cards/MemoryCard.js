@@ -6,13 +6,7 @@ import {
   doc,
   updateDoc,
 } from "firebase/firestore";
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { db } from "../../firebase/config";
 import { refreshMemories } from "../../utils/signals";
@@ -28,6 +22,7 @@ const MemoryCard = ({
   index,
   focusedMemoryCard,
   setFocusedMemoryCard,
+  network,
 }) => {
   const [newMemory, setNewMemory] = useState(null);
 
@@ -41,16 +36,16 @@ const MemoryCard = ({
   }, [newMemory]);
 
   const deleteMemories = async () => {
-    await deleteDoc(doc(db, user, destination, "memories", name)).then(() => {
-      setFocusedMemoryCard(null);
-      refreshMemories.dispatch();
-    });
+    await deleteDoc(doc(db, user, destination, "memories", name));
+    setFocusedMemoryCard(null);
+    refreshMemories.dispatch();
   };
 
   const deleteMemory = async (image) => {
     await updateDoc(docRef, {
       images: arrayRemove(image),
-    }).then(() => refreshMemories.dispatch());
+    });
+    refreshMemories.dispatch();
   };
 
   const pickImage = async () => {
@@ -97,9 +92,11 @@ const MemoryCard = ({
       >
         <View style={styles.nameAndDelete}>
           <Text style={styles.name}>{name}</Text>
-          <TouchableOpacity onPress={() => deleteMemories()}>
-            <Text style={styles.delete}>Supprimer</Text>
-          </TouchableOpacity>
+          {network && (
+            <TouchableOpacity onPress={() => deleteMemories()}>
+              <Text style={styles.delete}>Supprimer</Text>
+            </TouchableOpacity>
+          )}
         </View>
         <Text style={styles.description}>{description}</Text>
       </TouchableOpacity>
@@ -110,27 +107,24 @@ const MemoryCard = ({
         data={photos}
         renderItem={(image) => (
           <>
-            <TouchableOpacity
-              style={styles.deleteImage}
-              onPress={() => deleteMemory(image.item)}
-            >
-              <Text style={styles.deleteImageCross}>-</Text>
-            </TouchableOpacity>
-            <Image
-              source={{ uri: image.item }}
-              style={styles.focusedImage}
-            />
+            {network && (
+              <TouchableOpacity
+                style={styles.deleteImage}
+                onPress={() => deleteMemory(image.item)}
+              >
+                <Text style={styles.deleteImageCross}>-</Text>
+              </TouchableOpacity>
+            )}
+            <Image source={{ uri: image.item }} style={styles.focusedImage} />
           </>
         )}
         keyExtractor={() => `focused${Math.random() * 100}`}
       />
-      <TouchableOpacity
-        style={styles.addMemory}
-        onPress={() => pickImage()}
-      >
-        <Text style={styles.addMemoryText}>+ Ajouter une image</Text>
-      </TouchableOpacity>
-
+      {network && (
+        <TouchableOpacity style={styles.addMemory} onPress={() => pickImage()}>
+          <Text style={styles.addMemoryText}>+ Ajouter une image</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
@@ -174,7 +168,7 @@ const styles = StyleSheet.create({
   gradient: {
     position: "absolute",
     top: 40,
-    width: "100%",
+    width: "130%",
     height: 40,
   },
   list: {

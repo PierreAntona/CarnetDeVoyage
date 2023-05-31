@@ -101,7 +101,7 @@ function Planning({ navigation, route }) {
         end={{ x: 0.5, y: 0 }}
       />
 
-      <TouchableOpacity
+      {route.params.network && <TouchableOpacity
         style={[
           styles.button,
           {
@@ -114,7 +114,7 @@ function Planning({ navigation, route }) {
       >
         <Text style={styles.buttonText}>Nouvelle étape</Text>
         <Text style={styles.arrow}>↑</Text>
-      </TouchableOpacity>
+      </TouchableOpacity>}
 
       <BottomForm
         isOpen={isOpen}

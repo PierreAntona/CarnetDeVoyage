@@ -42,18 +42,13 @@ export default function RestaurantForm({
                 adress: adress,
                 number: number,
             })
-                .then(() => {
-                    setIsOpen(false);
-                    refreshPlanning.dispatch();
-                    setName("");
-                    setDate(startDate ? new Date(startDate.seconds * 1000) : new Date());
-                    setTime(startDate ? new Date(startDate.seconds * 1000) : new Date());
-                    setAdress("");
-                    setNumber("");
-                })
-                .catch((e) => {
-                    setError(e.message);
-                });
+            setIsOpen(false);
+            refreshPlanning.dispatch();
+            setName("");
+            setDate(startDate ? new Date(startDate.seconds * 1000) : new Date());
+            setTime(startDate ? new Date(startDate.seconds * 1000) : new Date());
+            setAdress("");
+            setNumber("");
         } else {
             setError("Veuillez saisir un nom de restaurant");
         }

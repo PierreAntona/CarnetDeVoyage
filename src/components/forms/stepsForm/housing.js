@@ -1,15 +1,28 @@
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from "react-native";
 import DatePicker from "react-native-date-picker";
 import { digitalDate } from "../../../utils/dateFormating";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebase/config";
 import { refreshPlanning } from "../../../utils/signals";
 
-export default function HousingForm({ startDate, user, destination, setIsOpen }) {
+export default function HousingForm({
+    startDate,
+    user,
+    destination,
+    setIsOpen,
+}) {
     const [error, setError] = useState(null);
     const [openDateModal, setOpenDateModal] = useState(false);
-    const [date, setDate] = useState(startDate ? new Date(startDate.seconds * 1000) : new Date());
+    const [date, setDate] = useState(
+        startDate ? new Date(startDate.seconds * 1000) : new Date()
+    );
     const [adress, setAdress] = useState("");
     const [reference, setReference] = useState("");
     const [number, setNumber] = useState("");
@@ -26,23 +39,18 @@ export default function HousingForm({ startDate, user, destination, setIsOpen })
                 adress: adress,
                 number: number,
                 breakfast: breakfast,
-            })
-                .then(() => {
-                    setIsOpen(false);
-                    refreshPlanning.dispatch();
-                    setDate(startDate ? new Date(startDate.seconds * 1000) : new Date());
-                    setAdress("");
-                    setNumber("");
-                    setReference("");
-                    setBreakfast("");
-                })
-                .catch((e) => {
-                    setError(e.message);
-                });
+            });
+            setIsOpen(false);
+            refreshPlanning.dispatch();
+            setDate(startDate ? new Date(startDate.seconds * 1000) : new Date());
+            setAdress("");
+            setNumber("");
+            setReference("");
+            setBreakfast("");
         } else {
-            setError("Veuillez saisir une référence")
+            setError("Veuillez saisir une référence");
         }
-    }
+    };
 
     return (
         <>
@@ -96,18 +104,30 @@ export default function HousingForm({ startDate, user, destination, setIsOpen })
             <View style={styles.breakfast}>
                 <Text style={styles.breakfastText}>Petit déjeuner</Text>
                 <View style={styles.buttons}>
-                <TouchableOpacity style={[styles.choice, breakfast && {backgroundColor: "#000"}]} onPress={() => setBreakfast(true)}>
-                    <Text style={[styles.choiceText, breakfast && {color: "#E5CA93"}]}>Avec</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.choice, !breakfast && {backgroundColor: "#000"}]} onPress={() => setBreakfast(false)}>
-                    <Text style={[styles.choiceText, !breakfast && {color: "#E5CA93"}]}>Sans</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.choice, breakfast && { backgroundColor: "#000" }]}
+                        onPress={() => setBreakfast(true)}
+                    >
+                        <Text
+                            style={[styles.choiceText, breakfast && { color: "#E5CA93" }]}
+                        >
+                            Avec
+                        </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                        style={[styles.choice, !breakfast && { backgroundColor: "#000" }]}
+                        onPress={() => setBreakfast(false)}
+                    >
+                        <Text
+                            style={[styles.choiceText, !breakfast && { color: "#E5CA93" }]}
+                        >
+                            Sans
+                        </Text>
+                    </TouchableOpacity>
                 </View>
             </View>
 
-            {error &&
-                <Text style={styles.error}>{error}</Text>
-            }
+            {error && <Text style={styles.error}>{error}</Text>}
 
             <TouchableOpacity style={styles.button} onPress={() => addStep()}>
                 <Text style={styles.buttonText}>Ajouter</Text>
@@ -115,7 +135,7 @@ export default function HousingForm({ startDate, user, destination, setIsOpen })
             </TouchableOpacity>
         </>
     );
-};
+}
 
 const styles = StyleSheet.create({
     input: {
@@ -164,10 +184,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingVertical: 4,
         borderColor: "#000",
-        borderWidth: 1
+        borderWidth: 1,
     },
     choiceText: {
         fontSize: 16,
         fontFamily: "NotoSans-Light",
-    }
-})
+    },
+});

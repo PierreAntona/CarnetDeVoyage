@@ -13,7 +13,7 @@ import { FREE_CURRENCY_API } from "@env";
 import { LinearGradient } from "expo-linear-gradient";
 import axios from "axios";
 
-const CardDetails = ({ destination, start, end, navigation, user }) => {
+const CardDetails = ({ destination, start, end, navigation, user, network }) => {
   const [exchangeRate, setExchangeRate] = useState("");
 
   useEffect(() => {
@@ -67,6 +67,7 @@ const CardDetails = ({ destination, start, end, navigation, user }) => {
             navigation.navigate("Planning", {
               destination: destination.destination.name,
               user: user,
+              network: network
             })
           }
         >
@@ -80,6 +81,7 @@ const CardDetails = ({ destination, start, end, navigation, user }) => {
             navigation.navigate("Memories", {
               destination: destination.destination.name,
               user: user,
+              network: network
             })
           }
         >
@@ -195,13 +197,12 @@ function TravelCard({ navigation, user, destination, start, end, network }) {
 
   return (
     <TouchableOpacity onPress={() => (!isSlide && network ? slideRight() : slideLeft())}>
-      {network &&
         <Animated.View
           style={[
             styles.container,
             {
               transform: [{ translateX: slideAnim }],
-              zIndex: index,
+              zIndex: network ? index : 0,
             },
           ]}
         >
@@ -216,7 +217,7 @@ function TravelCard({ navigation, user, destination, start, end, network }) {
                   { rotate: "-90deg" },
                   { translateX: destinationNameWidth / 2 },
                 ],
-                opacity: fadeAnim,
+                opacity: network ? fadeAnim : 0,
               },
             ]}
           >
@@ -228,15 +229,15 @@ function TravelCard({ navigation, user, destination, start, end, network }) {
             start={{ x: 0.125, y: 0.5 }}
             end={{ x: 0.75, y: 0.2 }}
           />
-          <Image style={styles.image} source={{ uri: destination.photoUrl }} />
+          <Image style={[styles.image,{opacity: network ? 1 : 0}]} source={{ uri: destination.photoUrl }} />
         </Animated.View>
-      }
       <CardDetails
         destination={destination}
         start={start}
         end={end}
         navigation={navigation}
         user={user}
+        network={network}
       />
     </TouchableOpacity>
   );

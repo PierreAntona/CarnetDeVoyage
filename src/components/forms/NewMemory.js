@@ -26,16 +26,11 @@ function NewMemory({ user, destination, setIsOpen }) {
       description: description,
       images: images,
     })
-      .then(() => {
-        setIsOpen(false);
-        refreshMemories.dispatch();
-        setImages([]);
-        setCategory("");
-        setDescription("");
-      })
-      .catch((e) => {
-        setError(e.message);
-      });
+    setIsOpen(false);
+    refreshMemories.dispatch();
+    setImages([]);
+    setCategory("");
+    setDescription("");
   };
 
   const pickImage = async () => {

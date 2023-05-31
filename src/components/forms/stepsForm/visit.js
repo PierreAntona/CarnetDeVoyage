@@ -28,17 +28,12 @@ export default function VisitForm({ startDate, user, destination, setIsOpen }) {
                 date: date,
                 adress: adress,
             })
-                .then(() => {
-                    setIsOpen(false);
-                    refreshPlanning.dispatch();
-                    setDate(startDate ? new Date(startDate.seconds * 1000) : new Date());
-                    setTime(startDate ? new Date(startDate.seconds * 1000) : new Date());
-                    setAdress("");
-                    setName("");
-                })
-                .catch((e) => {
-                    setError(e.message);
-                });
+            setIsOpen(false);
+            refreshPlanning.dispatch();
+            setDate(startDate ? new Date(startDate.seconds * 1000) : new Date());
+            setTime(startDate ? new Date(startDate.seconds * 1000) : new Date());
+            setAdress("");
+            setName("");
         } else {
             setError("Veuillez saisir un nom de visite")
         }

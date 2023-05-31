@@ -59,20 +59,14 @@ function NewTravel({ user, setIsOpen }) {
           end: endDate,
           valise: []
         })
-          .then(() => {
-            setIsOpen(false);
-            setDestination({
-              place_id: "",
-              name: "",
-            })
-            setStartDate(new Date());
-            setEndDate(new Date());
-            refreshTravels.dispatch();
-          })
-          .catch((e) => {
-            setError(e.message);
-          });
-
+        setIsOpen(false);
+        setDestination({
+          place_id: "",
+          name: "",
+        })
+        setStartDate(new Date());
+        setEndDate(new Date());
+        refreshTravels.dispatch();
         setCurrency(null);
       }
 
@@ -240,10 +234,9 @@ const styles = StyleSheet.create({
   input: {
     borderBottomWidth: 1,
     fontSize: 18,
-    marginBottom: 18,
     fontFamily: "NotoSans-Light",
     width: "100%",
-    marginBottom: 50,
+    marginBottom: 24,
     height: 50,
   },
   error: {
@@ -252,7 +245,6 @@ const styles = StyleSheet.create({
   },
   button: {
     alignSelf: "flex-end",
-    marginTop: 20,
     flexDirection: "row",
     justifyContent: "center"
   },

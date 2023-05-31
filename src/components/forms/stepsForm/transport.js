@@ -31,19 +31,14 @@ export default function TransportForm({ startDate, user, destination, setIsOpen 
             departureStation: departureStation,
             arrivalStation: arrivalStation,
         })
-            .then(() => {
-                setIsOpen(false);
-                refreshPlanning.dispatch();
-                setDate(startDate ? new Date(startDate.seconds * 1000) : new Date());
-                setDepartureStation("");
-                setArrivalStation("");
-                setDepartureTime(startDate ? new Date(startDate.seconds * 1000) : new Date());
-                setArrivalTime(startDate ? new Date(startDate.seconds * 1000) : new Date());
-                setLine("");
-            })
-            .catch((e) => {
-                setError(e.message);
-            });
+        setIsOpen(false);
+        refreshPlanning.dispatch();
+        setDate(startDate ? new Date(startDate.seconds * 1000) : new Date());
+        setDepartureStation("");
+        setArrivalStation("");
+        setDepartureTime(startDate ? new Date(startDate.seconds * 1000) : new Date());
+        setArrivalTime(startDate ? new Date(startDate.seconds * 1000) : new Date());
+        setLine("");
         } else {
             setError("Veuillez saisir une ligne")
         }

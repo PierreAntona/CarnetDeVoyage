@@ -15,7 +15,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { refreshMemories } from "../utils/signals";
 
-import {LogBox} from 'react-native';
+import { LogBox } from 'react-native';
 
 function Memories({ navigation, route }) {
   const [memories, setMemories] = useState([]);
@@ -80,6 +80,7 @@ function Memories({ navigation, route }) {
             photos={memory.item.images}
             focusedMemoryCard={focusedMemoryCard}
             setFocusedMemoryCard={setFocusedMemoryCard}
+            network={route.params.network}
           />
         )}
         keyExtractor={(memory) => memory.index}
@@ -92,20 +93,21 @@ function Memories({ navigation, route }) {
         end={{ x: 0.5, y: 0 }}
       />
 
-      <TouchableOpacity
-        style={[
-          styles.button,
-          {
-            position: "absolute",
-            zIndex: 2,
-            bottom: 50,
-          },
-        ]}
-        onPress={() => setIsOpen(true)}
-      >
-        <Text style={styles.buttonText}>Nouveau souvenir</Text>
-        <Text style={styles.arrow}>↑</Text>
-      </TouchableOpacity>
+      {route.params.network &&
+        <TouchableOpacity
+          style={[
+            styles.button,
+            {
+              position: "absolute",
+              zIndex: 2,
+              bottom: 50,
+            },
+          ]}
+          onPress={() => setIsOpen(true)}
+        >
+          <Text style={styles.buttonText}>Nouveau souvenir</Text>
+          <Text style={styles.arrow}>↑</Text>
+        </TouchableOpacity>}
 
       <BottomForm
         isOpen={isOpen}

@@ -9,7 +9,7 @@ import {
   Text,
 } from "react-native";
 
-const DEFAULT_HEIGHT = 675;
+const DEFAULT_HEIGHT = 695;
 
 function useAnimatedBottom(isOpen, height = DEFAULT_HEIGHT) {
   const AnimatedValue = useRef(new Animated.Value(0));
@@ -85,10 +85,11 @@ const styles = StyleSheet.create({
     zIndex: 3,
     backgroundColor: "#E5CA93",
     padding: 13,
+    paddingBottom: 40
   },
   title: {
     fontSize: 32,
     fontFamily: 'Playfair-Regular',
-    marginBottom: 30
+    marginBottom: 24
   }
 });
